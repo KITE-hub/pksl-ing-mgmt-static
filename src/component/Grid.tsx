@@ -29,7 +29,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
               <div />
             ) : (
               <img
-                src={params.row.ingImage}
+                src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
                 alt=""
                 width={35}
                 height={35}

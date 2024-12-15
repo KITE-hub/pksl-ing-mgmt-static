@@ -120,7 +120,7 @@ function DishSelect({
                       const resultItem = result.find((item) => item.ingName === ingredient);
                       return resultItem ? (
                         <div key={ingredient} style={{display: 'flex', alignItems: 'center'}}>
-                          <img src={resultItem.ingImage} alt={ingredient} width={24} height={24} />
+                          <img src={`${process.env.PUBLIC_URL || ''}${resultItem.ingImage}`} alt={ingredient} width={24} height={24} />
                           <span className="mr-2 text-[#653618] text-xs w-5">
                             x
                             {
@@ -151,7 +151,7 @@ function DishSelect({
           const resultItem = result.find((item) => item.ingName === ingredient);
           return resultItem ? (
             <div key={ingredient} className="flex items-center">
-              <img src={resultItem.ingImage} alt={ingredient} width={32} height={32} />
+              <img src={`${process.env.PUBLIC_URL || ''}${resultItem.ingImage}`} alt={ingredient} width={32} height={32} />
               <span className="mr-2 text-[#653618] text-xs w-5">
                 x
                 {

@@ -4,7 +4,7 @@ import Description from './component/Description';
 import TextInput from './component/TextInput';
 import DishOrderInput from './component/DishOrderInput';
 import Grid from './component/Grid';
-import {ResultInitialState} from './db/ResultInitialState';
+import ResultInitialState from './db/ResultInitialState.json';
 import {iResult} from './types';
 
 function App() {
