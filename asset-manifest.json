@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pksl-ing-mgmt-static/static/css/main.cb92a4b8.css",
+    "main.js": "/pksl-ing-mgmt-static/static/js/main.1b35059a.js",
+    "static/js/453.562b9e8c.chunk.js": "/pksl-ing-mgmt-static/static/js/453.562b9e8c.chunk.js",
+    "index.html": "/pksl-ing-mgmt-static/index.html",
+    "main.cb92a4b8.css.map": "/pksl-ing-mgmt-static/static/css/main.cb92a4b8.css.map",
+    "main.1b35059a.js.map": "/pksl-ing-mgmt-static/static/js/main.1b35059a.js.map",
+    "453.562b9e8c.chunk.js.map": "/pksl-ing-mgmt-static/static/js/453.562b9e8c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cb92a4b8.css",
+    "static/js/main.1b35059a.js"
+  ]
+}
