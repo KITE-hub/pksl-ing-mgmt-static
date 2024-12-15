@@ -1,14 +1,4 @@
-import {
-  Autocomplete,
-  TextField,
-  Paper,
-  Button,
-  DialogTitle,
-  Switch,
-  SwitchProps,
-  Tabs,
-  Tab
-} from '@mui/material';
+import {Autocomplete, TextField, Paper, Button, DialogTitle, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import {styled} from '@mui/material/styles';
 import {iDishData} from '../types';

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { StyledSwitch } from './MUIStyledComponents';
+import React, {useState} from 'react';
+import {StyledSwitch} from './MUIStyledComponents';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { IconButton, Dialog, DialogContent, DialogActions } from '@mui/material';
-import { StyledDialogTitle, StyledButton, DescriptionTheme } from './MUIStyledComponents';
-import { ThemeProvider } from '@mui/material/styles';
+import {IconButton, Dialog, DialogContent, DialogActions} from '@mui/material';
+import {StyledDialogTitle, StyledButton, DescriptionTheme} from './MUIStyledComponents';
+import {ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 function Switch({
@@ -49,8 +49,8 @@ function Switch({
               <hr className="mt-1 mb-2" />
               <div>
                 {'　'}
-                合計モードは、各食材でカレー・シチュー、サラダ、デザート・ドリンクの合計食材数の合計を食材数
-                (目標) に表示します。
+                合計モードは、各食材でカレー・シチュー、サラダ、デザート・ドリンクの合計食材数の合計を食材数 (目標)
+                に表示します。
                 <br />
                 {'　'}
                 例えば、ある食材名において、カレーとシチューで使用された合計食材数が100、サラダで使用された合計食材数が250、デザートで使用された合計食材数が300の場合、その食材名の食材数

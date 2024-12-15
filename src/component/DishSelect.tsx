@@ -1,17 +1,12 @@
-import { iDishData, DishSelectProps } from '../types';
+import {iDishData, DishSelectProps} from '../types';
 import Salad from '../db/Salad.json';
 import Curry from '../db/Curry.json';
 import Dessert from '../db/Dessert.json';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { ThemeProvider } from '@mui/material/styles';
-import { DishOrderInputTheme } from './MUIStyledComponents';
-import {
-  StyledAutocomplete,
-  StyledPaper,
-  StyledListbox,
-  StyledTextField
-} from './MUIStyledComponents';
+import {ThemeProvider} from '@mui/material/styles';
+import {DishOrderInputTheme} from './MUIStyledComponents';
+import {StyledAutocomplete, StyledPaper, StyledListbox, StyledTextField} from './MUIStyledComponents';
 
 const dishDataCurry: iDishData[] = Curry as iDishData[];
 const dishDataSalad: iDishData[] = Salad as iDishData[];
@@ -53,21 +48,12 @@ function DishSelect({
         <ThemeProvider theme={DishOrderInputTheme}>
           <StyledAutocomplete
             disablePortal
-            options={
-              category === 'Curry'
-                ? dishDataCurry
-                : category === 'Salad'
-                  ? dishDataSalad
-                  : dishDataDessert
-            }
+            options={category === 'Curry' ? dishDataCurry : category === 'Salad' ? dishDataSalad : dishDataDessert}
             getOptionLabel={(option) => option.name}
             value={
-              (category === 'Curry'
-                ? dishDataCurry
-                : category === 'Salad'
-                  ? dishDataSalad
-                  : dishDataDessert
-              ).find((d) => d.name === dish.name) || null
+              (category === 'Curry' ? dishDataCurry : category === 'Salad' ? dishDataSalad : dishDataDessert).find(
+                (d) => d.name === dish.name
+              ) || null
             }
             filterOptions={(options, state) => {
               const inputValue = normalizeString(state.inputValue);
@@ -134,12 +120,7 @@ function DishSelect({
                       const resultItem = result.find((item) => item.ingName === ingredient);
                       return resultItem ? (
                         <div key={ingredient} style={{display: 'flex', alignItems: 'center'}}>
-                          <img
-                            src={resultItem.ingImage}
-                            alt={ingredient}
-                            width={24}
-                            height={24}
-                          />
+                          <img src={resultItem.ingImage} alt={ingredient} width={24} height={24} />
                           <span className="mr-2 text-[#653618] text-xs w-5">
                             x
                             {
@@ -163,12 +144,9 @@ function DishSelect({
       </div>
       <div className="flex items-center justify-end">
         {Object.keys(
-          (category === 'Curry'
-            ? dishDataCurry
-            : category === 'Salad'
-              ? dishDataSalad
-              : dishDataDessert
-          ).find((d) => d.name === dish.name)?.ingredients || {}
+          (category === 'Curry' ? dishDataCurry : category === 'Salad' ? dishDataSalad : dishDataDessert).find(
+            (d) => d.name === dish.name
+          )?.ingredients || {}
         ).map((ingredient) => {
           const resultItem = result.find((item) => item.ingName === ingredient);
           return resultItem ? (
@@ -177,12 +155,9 @@ function DishSelect({
               <span className="mr-2 text-[#653618] text-xs w-5">
                 x
                 {
-                  (category === 'Curry'
-                    ? dishDataCurry
-                    : category === 'Salad'
-                      ? dishDataSalad
-                      : dishDataDessert
-                  ).find((d) => d.name === dish.name)?.ingredients[ingredient]
+                  (category === 'Curry' ? dishDataCurry : category === 'Salad' ? dishDataSalad : dishDataDessert).find(
+                    (d) => d.name === dish.name
+                  )?.ingredients[ingredient]
                 }
               </span>
             </div>

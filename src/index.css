@@ -16,8 +16,8 @@ body {
   color: var(--foreground) !important;
   background: var(--background) !important;
   margin: 0;
-  font-family: 'M PLUS 1p', 'Roboto', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-  'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'M PLUS 1p', 'Roboto', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -79,4 +79,3 @@ ol {
     display: flex;
   }
 }
-

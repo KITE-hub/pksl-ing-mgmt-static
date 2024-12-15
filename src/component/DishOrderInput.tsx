@@ -58,11 +58,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
     value: string | number
   ) => {
     const updatedDishOrder: iDishOrder[] = [
-      ...(category === 'Curry'
-        ? dishOrderCurry
-        : category === 'Salad'
-          ? dishOrderSalad
-          : dishOrderDessert)
+      ...(category === 'Curry' ? dishOrderCurry : category === 'Salad' ? dishOrderSalad : dishOrderDessert)
     ];
     if (field === 'name') {
       updatedDishOrder[index].name = value as string;
@@ -91,20 +87,12 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
     updateDishState(category, index, 'name', String(value));
   };
 
-  const handleCountChange = (
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number,
-    value: number
-  ) => {
+  const handleCountChange = (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => {
     updateDishState(category, index, 'count', value);
   };
   const updateDishOrder = (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete') => {
     const currentDishOrder =
-      category === 'Curry'
-        ? dishOrderCurry
-        : category === 'Salad'
-          ? dishOrderSalad
-          : dishOrderDessert;
+      category === 'Curry' ? dishOrderCurry : category === 'Salad' ? dishOrderSalad : dishOrderDessert;
 
     if (action === 'add') {
       const newDish = {name: '', count: 0};
@@ -127,8 +115,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
   );
 
   useEffect(() => {
-    if (dishOrderCurry.length === 0 && dishOrderSalad.length === 0 && dishOrderDessert.length === 0)
-      return; // すべてのdishOrderが空の場合は何もしない
+    if (dishOrderCurry.length === 0 && dishOrderSalad.length === 0 && dishOrderDessert.length === 0) return; // すべてのdishOrderが空の場合は何もしない
     const updatedResult = result.map((item) => {
       let totalCurryTargetIngCount = 0;
       let totalSaladTargetIngCount = 0;
@@ -152,9 +139,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
         }
       });
       dishOrderDessert.forEach((dish) => {
-        const dishDataItem: iDishData | undefined = dishDataDessert.find(
-          (d) => d.name === dish.name
-        );
+        const dishDataItem: iDishData | undefined = dishDataDessert.find((d) => d.name === dish.name);
         if (!dishDataItem) return;
 
         const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
@@ -164,14 +149,9 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
       });
       let totalTargetIngCount;
       if (isMaximumMode) {
-        totalTargetIngCount = Math.max(
-          totalCurryTargetIngCount,
-          totalSaladTargetIngCount,
-          totalDessertTargetIngCount
-        );
+        totalTargetIngCount = Math.max(totalCurryTargetIngCount, totalSaladTargetIngCount, totalDessertTargetIngCount);
       } else {
-        totalTargetIngCount =
-          totalCurryTargetIngCount + totalSaladTargetIngCount + totalDessertTargetIngCount;
+        totalTargetIngCount = totalCurryTargetIngCount + totalSaladTargetIngCount + totalDessertTargetIngCount;
       }
       const diffIngCount = item.nowIngCount - item.targetIngCount;
       return {

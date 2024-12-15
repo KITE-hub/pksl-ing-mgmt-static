@@ -1,20 +1,20 @@
-import { useReducer, useCallback } from 'react';
+import {useReducer, useCallback} from 'react';
 import DishSelect from './DishSelect';
-import { DishOrderDisplayProps } from '../types';
-import { StyledTabs, StyledTab } from './MUIStyledComponents';
+import {DishOrderDisplayProps} from '../types';
+import {StyledTabs, StyledTab} from './MUIStyledComponents';
 
 interface State {
   tabIndex: number; // 初期状態に応じて適切な型を指定
 }
 interface Action {
   type: string;
-  payload?: { index: number };
+  payload?: {index: number};
 }
-const initialState: State = { tabIndex: 0 }; // 初期状態を定義
+const initialState: State = {tabIndex: 0}; // 初期状態を定義
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'changeUpperTab':
-      return { ...state, tabIndex: action.payload?.index ?? state.tabIndex };
+      return {...state, tabIndex: action.payload?.index ?? state.tabIndex};
     default:
       return state;
   }
@@ -34,17 +34,13 @@ function DishOrderDisplayNarrow({
   const tabColors = ['#fe8b71', '#51e188', '#f6bd5a'];
   const onTabChange = useCallback(
     (event: React.SyntheticEvent, newValue: number) => {
-      dispatch({ type: 'changeUpperTab', payload: { index: newValue } });
+      dispatch({type: 'changeUpperTab', payload: {index: newValue}});
     },
     [dispatch]
   );
   return (
     <div className="DishOrderDisplay1">
-      <StyledTabs
-        value={state.tabIndex}
-        onChange={onTabChange}
-        selectedcolor={tabColors[state.tabIndex]}
-      >
+      <StyledTabs value={state.tabIndex} onChange={onTabChange} selectedcolor={tabColors[state.tabIndex]}>
         <StyledTab selectedcolor={tabColors[state.tabIndex]} label="カレー・シチュー" />
         <StyledTab selectedcolor={tabColors[state.tabIndex]} label="サラダ" />
         <StyledTab selectedcolor={tabColors[state.tabIndex]} label="デザート・ドリンク" />

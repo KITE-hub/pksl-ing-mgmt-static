@@ -47,11 +47,7 @@ export interface DishSelectProps {
     category: 'Curry' | 'Salad' | 'Dessert',
     index: number
   ) => void;
-  handleCountChange: (
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number,
-    value: number
-  ) => void;
+  handleCountChange: (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => void;
   result: iResult[];
 }
 
@@ -68,11 +64,7 @@ export interface DishOrderDisplayProps {
     category: 'Curry' | 'Salad' | 'Dessert',
     index: number
   ) => void;
-  handleCountChange: (
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number,
-    value: number
-  ) => void;
+  handleCountChange: (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => void;
   dishOrderCurry: iDishOrder[];
   dishOrderSalad: iDishOrder[];
   dishOrderDessert: iDishOrder[];

@@ -44,9 +44,7 @@ const extractIngredientsAndNumbers = (inputValue: string[]): ExtractResult => {
     } else if (isNumberFound) {
       let remaining = item;
       while (remaining.length > 0) {
-        const matchedKey = Object.keys(ingredientsReadList).find((key) =>
-          remaining.startsWith(key)
-        );
+        const matchedKey = Object.keys(ingredientsReadList).find((key) => remaining.startsWith(key));
         if (matchedKey) {
           ingredients.push(matchedKey);
           remaining = remaining.slice(matchedKey.length);
@@ -181,16 +179,9 @@ function TextInput({result, setResult}: InputProps) {
   useEffect(() => {
     const {ingredients, numbers} = extractIngredientsAndNumbers(processedInputValue);
     const validatedNumbers = validateAndParseNumbers(numbers);
-    const {ingredients: ingredients2, numbers: numbers2} =
-      extractIngredientsAndNumbers(processedInputValue2);
+    const {ingredients: ingredients2, numbers: numbers2} = extractIngredientsAndNumbers(processedInputValue2);
     const validatedNumbers2 = validateAndParseNumbers(numbers2);
-    const updatedResult = updateResult(
-      ingredients,
-      validatedNumbers,
-      ingredients2,
-      validatedNumbers2,
-      result
-    );
+    const updatedResult = updateResult(ingredients, validatedNumbers, ingredients2, validatedNumbers2, result);
     if (updatedResult !== result) {
       setResult(updatedResult);
     }
@@ -207,21 +198,11 @@ function TextInput({result, setResult}: InputProps) {
       </div>
       <div className="">
         <div className="flex items-center justify-center">
-          <StyledTextInputField
-            multiline
-            rows={4}
-            value={inputValue.join(' ')}
-            onChange={handleInputChange}
-          />
+          <StyledTextInputField multiline rows={4} value={inputValue.join(' ')} onChange={handleInputChange} />
           <StyledClearIcon onClick={clearInputValue} />
         </div>
         <div className="flex items-center justify-center">
-          <StyledTextInputField
-            multiline
-            rows={4}
-            value={inputValue2.join(' ')}
-            onChange={handleInputChange2}
-          />
+          <StyledTextInputField multiline rows={4} value={inputValue2.join(' ')} onChange={handleInputChange2} />
           <StyledClearIcon onClick={clearInputValue2} />
         </div>
       </div>

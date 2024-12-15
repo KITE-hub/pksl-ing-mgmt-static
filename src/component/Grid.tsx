@@ -1,9 +1,9 @@
 import React from 'react';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { GridProps } from '../types';
+import {DataGrid, GridRowsProp, GridColDef} from '@mui/x-data-grid';
+import {GridProps} from '../types';
 import Switch from './Switch';
 
-function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
+function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
   const rows: GridRowsProp = result.map((item, index) => ({
     id: index,
     ...item
@@ -15,6 +15,7 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
       flex: 140,
       minWidth: 100,
       renderCell: (params) => {
+        console.log(params.row.ingImage);
         const isTotalRow = params.row.id === 'total';
         return (
           <div
@@ -55,18 +56,16 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
     {
       field: 'nowIngCount',
       renderHeader: () => (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{ fontSize: '14px' }}>(現在)</span>
+          <span style={{fontSize: '14px'}}>(現在)</span>
         </div>
       ),
       flex: 95,
       minWidth: 95,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
-        return (
-          <span style={{ fontWeight: isTotalRow ? 'bold' : 'normal' }}>{params.row.nowIngCount}</span>
-        );
+        return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.nowIngCount}</span>;
       },
       sortingOrder: ['asc', null],
       sortComparator: (v1, v2, param1, param2) => {
@@ -81,20 +80,16 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
     {
       field: 'targetIngCount',
       renderHeader: () => (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{ fontSize: '14px' }}>(目標)</span>
+          <span style={{fontSize: '14px'}}>(目標)</span>
         </div>
       ),
       flex: 95,
       minWidth: 95,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
-        return (
-          <span style={{ fontWeight: isTotalRow ? 'bold' : 'normal' }}>
-            {params.row.targetIngCount}
-          </span>
-        );
+        return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.targetIngCount}</span>;
       },
       sortingOrder: ['asc', null],
       sortComparator: (v1, v2, param1, param2) => {
@@ -109,9 +104,9 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
     {
       field: 'diffIngCount',
       renderHeader: () => (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{ fontSize: '14px' }}>(差分)</span>
+          <span style={{fontSize: '14px'}}>(差分)</span>
         </div>
       ),
       flex: 95,
@@ -149,7 +144,7 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
       acc.diffIngCount += item.diffIngCount;
       return acc;
     },
-    { nowIngCount: 0, targetIngCount: 0, diffIngCount: 0 }
+    {nowIngCount: 0, targetIngCount: 0, diffIngCount: 0}
   );
 
   const rowsWithTotal = [
@@ -172,16 +167,13 @@ function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
         <h2 className="font-bold text-white bg-[#5dabfe] px-2 w-full clipSlant">食材一覧表</h2>
         {/* 食材一覧表の背景色はhsl(211, 99%, 68%) #5dabfe、元はhsl(211, 99%, 64%) #469ffe */}
       </div>
-      <Switch
-        checked={isMaximumMode}
-        onChange={(event) => setIsMaximumMode(event.target.checked)}
-      />
+      <Switch checked={isMaximumMode} onChange={(event) => setIsMaximumMode(event.target.checked)} />
       <DataGrid
         rows={rowsWithTotal}
         columns={columns}
         density="compact"
         initialState={{
-          pagination: { paginationModel: { pageSize: 100 } }
+          pagination: {paginationModel: {pageSize: 100}}
         }}
         disableColumnMenu={true}
         hideFooter={true}

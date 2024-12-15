@@ -20,7 +20,6 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import {DescriptionTheme, StyledDialogTitle, StyledButton} from './MUIStyledComponents';
 
-
 function Description() {
   const [moreMenuAnchor, setMoreMenuAnchor] = useState<HTMLElement | null>(null);
   const simulatorClick = () => {
@@ -69,12 +68,7 @@ function Description() {
     <div className="Description ml-auto">
       <ThemeProvider theme={DescriptionTheme}>
         <CssBaseline />
-        <IconButton
-          size="small"
-          aria-label="actions"
-          sx={{color: 'white'}}
-          onClick={moreButtonClick}
-        >
+        <IconButton size="small" aria-label="actions" sx={{color: 'white'}} onClick={moreButtonClick}>
           <MoreIcon />
         </IconButton>
         <Menu
@@ -156,9 +150,7 @@ function Description() {
                 <li>
                   ポケモンスリープを開き、食材バッグへ移動した画面を表示させる。このときに、注意点に書かれた要件を満たすようにする。
                 </li>
-                <li>
-                  ショートカットを実行し、テキスト入力へペーストする。食材数 (現在) へ反映される。
-                </li>
+                <li>ショートカットを実行し、テキスト入力へペーストする。食材数 (現在) へ反映される。</li>
                 <li>メニュー入力で、作りたい料理を入力する。</li>
                 <li>食材一覧表に、料理に必要な食材数と差分が表示される。</li>
               </ol>
@@ -220,8 +212,7 @@ function Description() {
                 className="mx-auto w-1/2"
               />
               <div className="text-center">
-                図3. 読み取り失敗例2{' '}
-                <small>(最下段の食材数に対応する食材名が画像中に存在しないため認識されない)</small>
+                図3. 読み取り失敗例2 <small>(最下段の食材数に対応する食材名が画像中に存在しないため認識されない)</small>
               </div>
               <br />
               <img
