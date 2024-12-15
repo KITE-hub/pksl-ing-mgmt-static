@@ -191,7 +191,7 @@ function Description() {
               </div>
               <br />
               <img
-                src="${process.env.PUBLIC_URL}/DescriptionImages/OK1.jpg"
+                src={`${process.env.PUBLIC_URL}/DescriptionImages/OK1.jpg`}
                 alt="OK1"
                 width={750}
                 height={1294}
@@ -202,7 +202,7 @@ function Description() {
               </div>
               <br />
               <img
-                src="${process.env.PUBLIC_URL}/DescriptionImages/NG1.jpg"
+                src={`${process.env.PUBLIC_URL}/DescriptionImages/NG1.jpg`}
                 alt="NG1"
                 width={750}
                 height={340}
@@ -213,7 +213,7 @@ function Description() {
               </div>
               <br />
               <img
-                src="${process.env.PUBLIC_URL}/DescriptionImages/NG2.jpg"
+                src={`${process.env.PUBLIC_URL}/DescriptionImages/NG2.jpg`}
                 alt="NG2"
                 width={750}
                 height={337}
@@ -225,7 +225,7 @@ function Description() {
               </div>
               <br />
               <img
-                src="${process.env.PUBLIC_URL}/DescriptionImages/NG3.jpg"
+                src={`${process.env.PUBLIC_URL}/DescriptionImages/NG3.jpg`}
                 alt="NG3"
                 width={750}
                 height={581}
