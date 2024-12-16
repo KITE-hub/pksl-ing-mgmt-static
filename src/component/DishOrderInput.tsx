@@ -11,6 +11,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {DishOrderInputTheme} from './MUIStyledComponents';
 import DishOrderDisplayNarrow from './DishOrderDisplayNarrow';
 import DishOrderDisplayWide from './DishOrderDisplayWide';
+import {SelectChangeEvent} from '@mui/material';
 
 const dishDataCurry: iDishData[] = Curry as iDishData[];
 const dishDataSalad: iDishData[] = Salad as iDishData[];
@@ -71,36 +72,34 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
     else setDishOrderDessert(updatedDishOrder);
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  const handleSelectChange = (
+    event: SelectChangeEvent<unknown>,
     category: 'Curry' | 'Salad' | 'Dessert',
     index: number
   ) => {
     updateDishState(category, index, 'name', String(event.target.value));
   };
-  const handleSelectChange = (
-    event: React.SyntheticEvent,
-    value: string,
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number
-  ) => {
-    updateDishState(category, index, 'name', String(value));
-  };
 
   const handleCountChange = (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => {
     updateDishState(category, index, 'count', value);
   };
-  const updateDishOrder = (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete') => {
+  const updateDishOrder = (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete', index: number) => {
     const currentDishOrder =
       category === 'Curry' ? dishOrderCurry : category === 'Salad' ? dishOrderSalad : dishOrderDessert;
 
     if (action === 'add') {
-      const newDish = {name: '', count: 0};
-      if (category === 'Curry') setDishOrderCurry([...currentDishOrder, newDish]);
-      else if (category === 'Salad') setDishOrderSalad([...currentDishOrder, newDish]);
-      else setDishOrderDessert([...currentDishOrder, newDish]);
+      // 現在のindexの次に新しい要素を挿入
+      const newDishOrder = [
+        ...currentDishOrder.slice(0, index + 1),
+        {name: '', count: 0},
+        ...currentDishOrder.slice(index + 1)
+      ];
+      if (category === 'Curry') setDishOrderCurry(newDishOrder);
+      else if (category === 'Salad') setDishOrderSalad(newDishOrder);
+      else setDishOrderDessert(newDishOrder);
     } else if (action === 'delete') {
-      const updatedDishOrder = currentDishOrder.slice(0, -1); // 最後の要素を削除
+      // 現在のindexの要素を削除
+      const updatedDishOrder = currentDishOrder.filter((_, i) => i !== index);
       if (category === 'Curry') setDishOrderCurry(updatedDishOrder);
       else if (category === 'Salad') setDishOrderSalad(updatedDishOrder);
       else setDishOrderDessert(updatedDishOrder);
@@ -186,7 +185,6 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
             {/* DishOrderDisplayNarrow か DishOrderDisplayWide のどちらかしか表示されない(レスポンシブ) */}
             <DishOrderDisplayNarrow
               updateDishOrder={updateDishOrder}
-              handleInputChange={handleInputChange}
               handleSelectChange={handleSelectChange}
               handleCountChange={handleCountChange}
               dishOrderCurry={dishOrderCurry}
@@ -196,7 +194,6 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
             />
             <DishOrderDisplayWide
               updateDishOrder={updateDishOrder}
-              handleInputChange={handleInputChange}
               handleSelectChange={handleSelectChange}
               handleCountChange={handleCountChange}
               dishOrderCurry={dishOrderCurry}

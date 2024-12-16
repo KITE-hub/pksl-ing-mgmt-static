@@ -34,7 +34,7 @@ const extractIngredientsAndNumbers = (inputValue: string[]): ExtractResult => {
   let isInitialError = false;
 
   inputValue.forEach((item, index) => {
-    if (/^[xX]/.test(item)) {
+    if (/^[xXх]/.test(item)) {
       numbers.push(item);
       isNumberFound = true;
       const withoutFirstChar = numbers[index]?.slice(1);
@@ -188,7 +188,7 @@ function TextInput({result, setResult}: InputProps) {
   }, [processedInputValue, processedInputValue2]);
 
   return (
-    <div className="ImageInput mt-6 mb-10 mx-auto">
+    <div className="TextInput mt-6 mb-10 mx-auto">
       <div className="flex mb-3">
         <span className="bg-[#25d76b] w-1.5 mr-1.5"></span>
         <div className="flex text-white bg-[#25d76b] px-2 w-full clipSlant items-end">
@@ -198,11 +198,11 @@ function TextInput({result, setResult}: InputProps) {
       </div>
       <div className="">
         <div className="flex items-center justify-center">
-          <StyledTextInputField multiline rows={4} value={inputValue.join(' ')} onChange={handleInputChange} />
+          <StyledTextInputField multiline rows={4} value={inputValue.join('\n')} onChange={handleInputChange} />
           <StyledClearIcon onClick={clearInputValue} />
         </div>
         <div className="flex items-center justify-center">
-          <StyledTextInputField multiline rows={4} value={inputValue2.join(' ')} onChange={handleInputChange2} />
+          <StyledTextInputField multiline rows={4} value={inputValue2.join('\n')} onChange={handleInputChange2} />
           <StyledClearIcon onClick={clearInputValue2} />
         </div>
       </div>

@@ -1,5 +1,19 @@
-import {Autocomplete, TextField, Paper, Button, DialogTitle, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
+import {
+  Autocomplete,
+  Select,
+  MenuItem,
+  TextField,
+  Paper,
+  Button,
+  DialogTitle,
+  Switch,
+  SwitchProps,
+  Tabs,
+  Tab
+} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {styled} from '@mui/material/styles';
 import {iDishData} from '../types';
 import {createTheme} from '@mui/material/styles';
@@ -10,11 +24,12 @@ export const StyledTextInputField = styled(TextField)({
   width: '80%',
   '& .MuiOutlinedInput-root': {
     borderRadius: '8px',
+    boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, .1)',
     backgroundColor: 'white',
     padding: '8px 10px',
     margin: '16px auto',
     width: '100%',
-    fontSize: '14px',
+    fontSize: '16px',
     fontWeight: 'normal',
     fontFamily: "'M PLUS 1p'",
     '& fieldset': {
@@ -54,72 +69,67 @@ export const DishOrderInputTheme = createTheme({
   }
 });
 
-export const StyledAutocomplete = styled(Autocomplete<iDishData>)(() => ({
-  '& .MuiOutlinedInput-root': {
-    backgroundColor: 'white',
-    height: '36px',
-    width: '295px',
-    padding: '0px 0px 0px 10px',
-    margin: '0px 0px',
-    boxSizing: 'border-box',
-    borderRadius: '8px',
-    boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, .1)',
-    '& .MuiInputBase-input': {
-      padding: '0px' // 内側のpaddingを調整
-    },
-    '& fieldset': {
-      borderColor: '#25d76b'
-    },
-    '&:hover fieldset': {
-      borderColor: '#25d76b'
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#25d76b',
-      borderWeight: '1px'
-    }
-  },
-  '& + .MuiAutocomplete-popper': {
-    '& .MuiAutocomplete-option': {
-      backgroundColor: 'white' // 通常の背景色
-    },
-    "& .MuiAutocomplete-option[aria-selected='true']": {
-      backgroundColor: 'hsl(143, 70%, 98%)' // 選択中の背景色
-    },
-    '& .MuiAutocomplete-option.Mui-focused': {
-      backgroundColor: 'hsl(143, 70%, 95%)' // フォーカス時の背景色
-    },
-    "& .MuiAutocomplete-option[aria-selected='true'].Mui-focused": {
-      backgroundColor: 'hsl(143, 70%, 95%)' // フォーカス時の背景色
-    }
-  }
-}));
-
-export const StyledTextField = styled(TextField)({
-  '& .MuiInputBase-input': {
-    fontSize: '14px',
-    fontWeight: 'bold'
-  },
-  '& .MuiInputLabel-root': {
-    fontSize: '14px',
-    fontWeight: 'normal'
-  }
-});
-
-export const StyledPaper = styled(Paper)(() => ({
-  // 元々は{theme}が引数
+export const StyledSelect = styled(Select)(() => ({
   backgroundColor: 'white',
-  borderRadius: '8px',
-  boxShadow: 'none',
+  height: '72px',
+  width: '295px',
+  padding: '0px 0px 0px 0px',
+  margin: '0px 0px',
   boxSizing: 'border-box',
-  border: '1px solid #25d76b'
+  borderRadius: '8px',
+  border: 'none',
+  boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, .1)',
+  '& .MuiOutlinedInput-notchedOutline': {
+    border: '1px solid #25d76b' // カスタムスタイルを適用
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    border: '1px solid #25d76b' // hover時も変化しない
+  },
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    border: '2px solid #25d76b' // フォーカス時も変化しない
+  }
 }));
 
-export const StyledListbox = styled('ul')(() => ({
-  // 元々は{theme}が引数
-  fontSize: '13px',
-  padding: 0
+export const StyledMenuItem = styled(MenuItem)(() => ({
+  backgroundColor: 'white',
+  transition: 'none',
+  display: 'flex',
+  flexDirection: 'column', // 内容を縦方向に並べる
+  alignItems: 'flex-start', // 左寄せ
+  padding: '8px 16px', // MenuItemの余白調整
+  whiteSpace: 'normal', // テキストが改行されるように
+  '&:hover': {
+    backgroundColor: 'hsl(143, 70%, 95%)' // hover時の背景色
+  },
+  '&.Mui-selected': {
+    backgroundColor: 'hsl(143, 70%, 98%)',
+    transition: 'none'
+  },
+  '&.Mui-selected:hover': {
+    backgroundColor: 'hsl(143, 70%, 95%)',
+    transition: 'none'
+  }
 }));
 
+export const StyledNavigateNextIcon = styled(NavigateNextIcon)(() => ({
+  borderRadius: '9999px',
+  width: '35px',
+  height: '35px',
+  padding: '5px',
+  '&:hover': {
+    backgroundColor: '#E8EBEF'
+  }
+}));
+
+export const StyledNavigateBeforeIcon = styled(NavigateBeforeIcon)(() => ({
+  borderRadius: '9999px',
+  width: '35px',
+  height: '35px',
+  padding: '5px',
+  '&:hover': {
+    backgroundColor: '#E8EBEF'
+  }
+}));
 // DishOrderInput.tsx
 
 export const StyledTabs = styled(Tabs)(({selectedcolor}: {selectedcolor: string}) => ({

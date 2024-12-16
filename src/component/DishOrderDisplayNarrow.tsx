@@ -22,7 +22,6 @@ const reducer = (state: State, action: Action): State => {
 
 function DishOrderDisplayNarrow({
   updateDishOrder,
-  handleInputChange,
   handleSelectChange,
   handleCountChange,
   dishOrderCurry,
@@ -39,7 +38,7 @@ function DishOrderDisplayNarrow({
     [dispatch]
   );
   return (
-    <div className="DishOrderDisplay1">
+    <div className="DishOrderDisplayNarrow">
       <StyledTabs value={state.tabIndex} onChange={onTabChange} selectedcolor={tabColors[state.tabIndex]}>
         <StyledTab selectedcolor={tabColors[state.tabIndex]} label="カレー・シチュー" />
         <StyledTab selectedcolor={tabColors[state.tabIndex]} label="サラダ" />
@@ -53,7 +52,6 @@ function DishOrderDisplayNarrow({
             index={index}
             category="Curry"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
@@ -67,7 +65,6 @@ function DishOrderDisplayNarrow({
             index={index}
             category="Salad"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
@@ -81,7 +78,6 @@ function DishOrderDisplayNarrow({
             index={index}
             category="Dessert"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}

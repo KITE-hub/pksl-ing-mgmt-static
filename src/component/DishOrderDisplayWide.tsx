@@ -3,7 +3,6 @@ import {DishOrderDisplayProps} from '../types';
 
 function DishOrderDisplayWide({
   updateDishOrder,
-  handleInputChange,
   handleSelectChange,
   handleCountChange,
   dishOrderCurry,
@@ -12,7 +11,7 @@ function DishOrderDisplayWide({
   result
 }: DishOrderDisplayProps) {
   return (
-    <div className="DishOrderDisplay2">
+    <div className="DishOrderDisplayWide">
       <div className="mt-3 mb-4">
         <div className="flex mb-3">
           <span className="bg-[#fe8b71] w-1.5 mr-1.5"></span>
@@ -26,7 +25,6 @@ function DishOrderDisplayWide({
             index={index}
             category="Curry"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
@@ -46,7 +44,6 @@ function DishOrderDisplayWide({
             index={index}
             category="Salad"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
@@ -66,7 +63,6 @@ function DishOrderDisplayWide({
             index={index}
             category="Dessert"
             updateDishOrder={updateDishOrder}
-            handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}

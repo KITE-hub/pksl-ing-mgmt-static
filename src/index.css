@@ -29,12 +29,16 @@ ol {
   list-style-position: inside;
 }
 
+.shadow-input {
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
 @media screen and (max-width: 1600px) {
   .DishOrderInput,
   .ImageInput {
     width: 360px;
   }
-  .DishOrderDisplay2 {
+  .DishOrderDisplayWide {
     display: none;
   }
 }
@@ -43,16 +47,12 @@ ol {
   .DishOrderInput {
     width: 1100px;
   }
-  .DishOrderDisplay1 {
+  .DishOrderDisplayNarrow {
     display: none;
   }
-  .DishOrderDisplay2 {
+  .DishOrderDisplayWide {
     display: flex;
     justify-content: space-between;
-  }
-  .responsiveFlexImageInput {
-    display: flex;
-    margin: 0px 200px;
   }
 }
 

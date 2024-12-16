@@ -1,3 +1,5 @@
+import {SelectChangeEvent} from '@mui/material';
+
 export interface iResult {
   ingName: string;
   ingImage: string;
@@ -35,15 +37,9 @@ export interface DishSelectProps {
   dish: iDishOrder;
   index: number;
   category: 'Curry' | 'Salad' | 'Dessert';
-  updateDishOrder: (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete') => void;
-  handleInputChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number
-  ) => void;
+  updateDishOrder: (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete', index: number) => void;
   handleSelectChange: (
-    event: React.SyntheticEvent,
-    value: string,
+    event: SelectChangeEvent<unknown>,
     category: 'Curry' | 'Salad' | 'Dessert',
     index: number
   ) => void;
@@ -52,15 +48,9 @@ export interface DishSelectProps {
 }
 
 export interface DishOrderDisplayProps {
-  updateDishOrder: (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete') => void;
-  handleInputChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    category: 'Curry' | 'Salad' | 'Dessert',
-    index: number
-  ) => void;
+  updateDishOrder: (category: 'Curry' | 'Salad' | 'Dessert', action: 'add' | 'delete', index: number) => void;
   handleSelectChange: (
-    event: React.SyntheticEvent,
-    value: string,
+    event: SelectChangeEvent<unknown>,
     category: 'Curry' | 'Salad' | 'Dessert',
     index: number
   ) => void;

@@ -601,10 +601,6 @@ video {
   margin-left: 0.25rem;
 }
 
-.ml-3 {
-  margin-left: 0.75rem;
-}
-
 .ml-4 {
   margin-left: 1rem;
 }
@@ -619,10 +615,6 @@ video {
 
 .mr-2 {
   margin-right: 0.5rem;
-}
-
-.mr-4 {
-  margin-right: 1rem;
 }
 
 .mt-1 {
@@ -669,6 +661,10 @@ video {
   width: 1.25rem;
 }
 
+.w-\[360px\] {
+  width: 360px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -704,6 +700,12 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .rounded-lg {
@@ -790,11 +792,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold {
@@ -892,13 +889,17 @@ ol {
   list-style-position: inside;
 }
 
+.shadow-input {
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
 @media screen and (max-width: 1600px) {
   .DishOrderInput,
   .ImageInput {
     width: 360px;
   }
 
-  .DishOrderDisplay2 {
+  .DishOrderDisplayWide {
     display: none;
   }
 }
@@ -908,18 +909,13 @@ ol {
     width: 1100px;
   }
 
-  .DishOrderDisplay1 {
+  .DishOrderDisplayNarrow {
     display: none;
   }
 
-  .DishOrderDisplay2 {
+  .DishOrderDisplayWide {
     display: flex;
     justify-content: space-between;
-  }
-
-  .responsiveFlexImageInput {
-    display: flex;
-    margin: 0px 200px;
   }
 }
 
