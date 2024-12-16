@@ -138,7 +138,7 @@ function Description() {
                 <li>XS以降のiPhoneを入手し、iOS 15以降をインストールする。</li>
                 <li>
                   <Link
-                    href="https://www.icloud.com/shortcuts/25dc216977454178a10d160bfa9eb4b0"
+                    href="https://www.icloud.com/shortcuts/e1eb862652ee4a3c9650622fc587eb64"
                     underline="hover"
                     target="_blank"
                     rel="noopener noreferrer"
