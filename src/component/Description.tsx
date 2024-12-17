@@ -16,8 +16,9 @@ import {
 import CheckIcon from '@mui/icons-material/Check';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {DescriptionTheme, StyledDialogTitle, StyledButton} from './MUIStyledComponents';
 
 function Description() {
@@ -64,6 +65,15 @@ function Description() {
     setIsReferenceDialogOpen(false);
   };
 
+  const [isDevRequestDialogOpen, setIsDevRequestDialogOpen] = useState(false);
+  const devRequestMenuClick = () => {
+    setIsDevRequestDialogOpen(true);
+    setMoreMenuAnchor(null);
+  };
+  const onDevRequestDialogClose = () => {
+    setIsDevRequestDialogOpen(false);
+  };
+
   return (
     <div className="Description ml-auto">
       <ThemeProvider theme={DescriptionTheme}>
@@ -98,7 +108,7 @@ function Description() {
           </MenuItem>
           <MenuItem onClick={cautionMenuClick}>
             <ListItemIcon>
-              <ErrorOutlineIcon />
+              <WarningAmberIcon />
             </ListItemIcon>
             注意点
           </MenuItem>
@@ -107,6 +117,12 @@ function Description() {
               <MenuBookIcon />
             </ListItemIcon>
             参考元
+          </MenuItem>
+          <MenuItem onClick={devRequestMenuClick}>
+            <ListItemIcon>
+              <InfoOutlinedIcon />
+            </ListItemIcon>
+            開発者・要望について
           </MenuItem>
         </Menu>
         <Dialog
@@ -264,16 +280,6 @@ function Description() {
                 </li>
                 <li>
                   <Link
-                    href="https://twitter.com/SwabluPksl/status/1855185947790565437"
-                    underline="hover"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    レシピ表 by チル＠ポケスリ
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="https://nitoyon.github.io/pokesleep-tool/iv/index.ja.html"
                     underline="hover"
                     target="_blank"
@@ -288,6 +294,37 @@ function Description() {
           </DialogContent>
           <DialogActions>
             <StyledButton onClick={onReferenceDialogClose}>閉じる</StyledButton>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={isDevRequestDialogOpen}
+          onClose={onDevRequestDialogClose}
+          scroll="paper"
+          aria-describedby="scroll-dialog-description"
+        >
+          <StyledDialogTitle>開発者・要望について</StyledDialogTitle>
+          <DialogContent dividers>
+            <div className="text-[#333]">
+              <div>
+                {'　'}
+                このツールは、{' '}
+                <Link href="https://x.com/mdk_pksldev" underline="hover" target="_blank" rel="noopener noreferrer">
+                  擬き(もどき)
+                </Link>{' '}
+                が個人で開発した非公式のツールです。
+                <br />
+                {'　'}
+                不具合報告や要望等は、X (twitter) の{' '}
+                <Link href="https://x.com/mdk_pksldev" underline="hover" target="_blank" rel="noopener noreferrer">
+                  @mdk_pksldev
+                </Link>{' '}
+                のDMまでお願いします (Googleフォームによる対応も検討中) 。
+              </div>
+              <br />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <StyledButton onClick={onDevRequestDialogClose}>閉じる</StyledButton>
           </DialogActions>
         </Dialog>
       </ThemeProvider>

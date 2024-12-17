@@ -33,12 +33,12 @@ const extractIngredientsAndNumbers = (inputValue: string[]): ExtractResult => {
   let isNumberFound = false;
   let isInitialError = false;
 
-  inputValue.forEach((item, index) => {
+  inputValue.forEach((item) => {
     if (/^[xXх]/.test(item)) {
       numbers.push(item);
       isNumberFound = true;
-      const withoutFirstChar = numbers[index]?.slice(1);
-      if (index < 4 && (!withoutFirstChar || !/^\d+$/.test(withoutFirstChar))) {
+      const withoutFirstChar = item.slice(1);
+      if (numbers.length < 4 && (!withoutFirstChar || !/^\d+$/.test(withoutFirstChar))) {
         isInitialError = true;
       }
     } else if (isNumberFound) {

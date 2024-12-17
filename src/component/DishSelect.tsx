@@ -72,7 +72,7 @@ function DishSelect({
                       {Object.keys(option.ingredients).map((ingredient) => {
                         const resultItem = result.find((item) => item.ingName === ingredient);
                         return resultItem ? (
-                          <Box key={ingredient} display="flex" alignItems="center" marginRight='3px'>
+                          <Box key={ingredient} display="flex" alignItems="center" marginRight="3px">
                             <img
                               src={`${process.env.PUBLIC_URL || ''}${resultItem.ingImage}`}
                               alt={ingredient}
