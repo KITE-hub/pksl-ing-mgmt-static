@@ -11,6 +11,7 @@ function Switch({
   onChange
 }: {
   checked: boolean;
+  // eslint-disable-next-line
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const [isSwitchInfoOpen, setIsSwitchInfoOpen] = useState<boolean>(false);
@@ -22,7 +23,7 @@ function Switch({
   };
 
   return (
-    <div className="flex items-center ml-auto">
+    <div className="flex items-center ml-auto my-[2px]">
       <span className="mx-4 text-sm">合計モード</span>
       <StyledSwitch checked={checked} onChange={onChange} />
       <span className="ml-4 mx-2 text-sm">最大値モード</span>

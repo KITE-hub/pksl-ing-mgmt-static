@@ -1,6 +1,9 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useRef} from 'react';
 import {InputProps} from '../types';
-import {StyledTextInputField, StyledClearIcon} from './MUIStyledComponents';
+import Collapse from '@mui/material/Collapse';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import {StyledTextInputField, StyledDeleteIcon} from './MUIStyledComponents';
 import {iResult} from '../types';
 import {debounce} from 'lodash';
 
@@ -38,7 +41,7 @@ const extractIngredientsAndNumbers = (inputValue: string[]): ExtractResult => {
       numbers.push(item);
       isNumberFound = true;
       const withoutFirstChar = item.slice(1);
-      if (numbers.length < 4 && (!withoutFirstChar || !/^\d+$/.test(withoutFirstChar))) {
+      if (numbers.length <= 4 && (!withoutFirstChar || !/^\d+$/.test(withoutFirstChar))) {
         isInitialError = true;
       }
     } else if (isNumberFound) {
@@ -106,6 +109,23 @@ const updateResult = (
 };
 
 function TextInput({result, setResult}: InputProps) {
+  const [isInputOpen, setIsInputOpen] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const storedIsInputOpen = localStorage.getItem('isInputOpen');
+      return storedIsInputOpen ? JSON.parse(storedIsInputOpen) : true;
+    }
+    return true;
+  });
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isInputOpen', JSON.stringify(isInputOpen));
+    }
+  }, [isInputOpen]);
+
+  const inputRef = useRef<HTMLDivElement | null>(null);
+  const toggleInput = () => {
+    setIsInputOpen(!isInputOpen);
+  };
   const [inputValue, setInputValue] = useState<string[]>([]);
   const [inputValue2, setInputValue2] = useState<string[]>([]);
   const [processedInputValue, setProcessedInputValue] = useState<string[]>([]);
@@ -188,24 +208,31 @@ function TextInput({result, setResult}: InputProps) {
   }, [processedInputValue, processedInputValue2]);
 
   return (
-    <div className="TextInput mt-6 mb-10 mx-auto">
-      <div className="flex mb-3">
+    <div className="TextInput mt-4 mb-6 mx-auto">
+      <div className="flex mb-3 cursor-pointer" onClick={toggleInput}>
         <span className="bg-[#25d76b] w-1.5 mr-1.5"></span>
         <div className="flex text-white bg-[#25d76b] px-2 w-full clipSlant items-end">
           <h3 className="font-bold">テキスト入力</h3>
           <small className="ml-1">(使い方必読)</small>
+          {isInputOpen ? (
+            <KeyboardArrowUpIcon style={{color: 'white', alignSelf: 'center', marginLeft: 'auto'}} />
+          ) : (
+            <KeyboardArrowDownIcon style={{color: 'white', alignSelf: 'center', marginLeft: 'auto'}} />
+          )}
         </div>
       </div>
-      <div className="">
-        <div className="flex items-center justify-center">
-          <StyledTextInputField multiline rows={4} value={inputValue.join('\n')} onChange={handleInputChange} />
-          <StyledClearIcon onClick={clearInputValue} />
+      <Collapse in={isInputOpen} timeout="auto" unmountOnExit>
+        <div ref={inputRef} className="flex">
+          <div className="w-6/12">
+            <StyledTextInputField multiline rows={4} value={inputValue.join('\n')} onChange={handleInputChange} />
+            <StyledDeleteIcon onClick={clearInputValue} />
+          </div>
+          <div className="w-6/12">
+            <StyledTextInputField multiline rows={4} value={inputValue2.join('\n')} onChange={handleInputChange2} />
+            <StyledDeleteIcon onClick={clearInputValue2} />
+          </div>
         </div>
-        <div className="flex items-center justify-center">
-          <StyledTextInputField multiline rows={4} value={inputValue2.join('\n')} onChange={handleInputChange2} />
-          <StyledClearIcon onClick={clearInputValue2} />
-        </div>
-      </div>
+      </Collapse>
     </div>
   );
 }

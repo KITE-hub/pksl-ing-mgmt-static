@@ -1,36 +1,25 @@
-import {
-  Autocomplete,
-  Select,
-  MenuItem,
-  TextField,
-  Paper,
-  Button,
-  DialogTitle,
-  Switch,
-  SwitchProps,
-  Tabs,
-  Tab
-} from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear';
+import {Select, MenuItem, TextField, Button, DialogTitle, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {styled} from '@mui/material/styles';
-import {iDishData} from '../types';
 import {createTheme} from '@mui/material/styles';
 
 // TextInput.tsx
 
 export const StyledTextInputField = styled(TextField)({
   width: '80%',
+  display: 'block',
+  margin: '4px auto',
   '& .MuiOutlinedInput-root': {
     borderRadius: '8px',
     boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, .1)',
     backgroundColor: 'white',
     padding: '8px 10px',
-    margin: '16px auto',
     width: '100%',
     fontSize: '16px',
     fontWeight: 'normal',
+    // eslint-disable-next-line
     fontFamily: "'M PLUS 1p'",
     '& fieldset': {
       borderColor: '#25d76b'
@@ -44,12 +33,14 @@ export const StyledTextInputField = styled(TextField)({
   }
 });
 
-export const StyledClearIcon = styled(ClearIcon)({
+export const StyledDeleteIcon = styled(DeleteIcon)({
   width: '35px',
   height: '35px',
-  marginLeft: '3%',
   cursor: 'pointer',
+  color: '#555',
   borderRadius: '9999px',
+  display: 'block',
+  margin: '5px auto 0px auto',
   padding: '5px',
   '&:hover': {
     backgroundColor: '#E8EBEF'
@@ -60,6 +51,7 @@ export const StyledClearIcon = styled(ClearIcon)({
 
 export const DishOrderInputTheme = createTheme({
   typography: {
+    // eslint-disable-next-line
     fontFamily: "'M PLUS 1p'"
   },
   palette: {
@@ -113,6 +105,7 @@ export const StyledMenuItem = styled(MenuItem)(() => ({
 
 export const StyledNavigateNextIcon = styled(NavigateNextIcon)(() => ({
   borderRadius: '9999px',
+  color: '#555',
   width: '35px',
   height: '35px',
   padding: '5px',
@@ -123,6 +116,7 @@ export const StyledNavigateNextIcon = styled(NavigateNextIcon)(() => ({
 
 export const StyledNavigateBeforeIcon = styled(NavigateBeforeIcon)(() => ({
   borderRadius: '9999px',
+  color: '#555',
   width: '35px',
   height: '35px',
   padding: '5px',
@@ -130,6 +124,7 @@ export const StyledNavigateBeforeIcon = styled(NavigateBeforeIcon)(() => ({
     backgroundColor: '#E8EBEF'
   }
 }));
+
 // DishOrderInput.tsx
 
 export const StyledTabs = styled(Tabs)(({selectedcolor}: {selectedcolor: string}) => ({
@@ -153,6 +148,7 @@ export const StyledTab = styled(Tab)<{selectedcolor: string}>(({selectedcolor}) 
 export const DescriptionTheme = createTheme({
   typography: {
     fontFamily:
+      // eslint-disable-next-line
       "'M PLUS 1p','Noto Sans JP', 'Helvetica Neue', 'Helvetica', 'Hiragino Sans', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif",
     fontSize: 14
   }

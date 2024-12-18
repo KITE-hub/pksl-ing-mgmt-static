@@ -15,7 +15,6 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       flex: 140,
       minWidth: 100,
       renderCell: (params) => {
-        console.log(params.row.ingImage);
         const isTotalRow = params.row.id === 'total';
         return (
           <div
@@ -31,8 +30,8 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
               <img
                 src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
                 alt=""
-                width={35}
-                height={35}
+                width={30}
+                height={30}
                 style={{
                   objectFit: 'cover',
                   marginLeft: '-5px',
@@ -58,7 +57,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       renderHeader: () => (
         <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{fontSize: '14px'}}>(現在)</span>
+          <span style={{fontSize: '13px'}}>(現在)</span>
         </div>
       ),
       flex: 95,
@@ -82,7 +81,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       renderHeader: () => (
         <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{fontSize: '14px'}}>(目標)</span>
+          <span style={{fontSize: '13px'}}>(目標)</span>
         </div>
       ),
       flex: 95,
@@ -106,7 +105,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       renderHeader: () => (
         <div style={{textAlign: 'center'}}>
           食材数 <br />
-          <span style={{fontSize: '14px'}}>(差分)</span>
+          <span style={{fontSize: '13px'}}>(差分)</span>
         </div>
       ),
       flex: 95,
@@ -161,8 +160,8 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
   ];
 
   return (
-    <div className="Grid mx-auto mt-6 mb-10 flex flex-col flex-grow-0">
-      <div className="flex mb-1">
+    <div className="Grid mx-auto mt-4 mb-6 flex flex-col flex-grow-0">
+      <div className="flex">
         <span className="bg-[#5dabfe] w-1.5 mr-1.5"></span>
         <h2 className="font-bold text-white bg-[#5dabfe] px-2 w-full clipSlant">食材一覧表</h2>
         {/* 食材一覧表の背景色はhsl(211, 99%, 68%) #5dabfe、元はhsl(211, 99%, 64%) #469ffe */}
@@ -171,7 +170,9 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       <DataGrid
         rows={rowsWithTotal}
         columns={columns}
-        density="compact"
+        density="comfortable"
+        rowHeight={24}
+        columnHeaderHeight={32}
         initialState={{
           pagination: {paginationModel: {pageSize: 100}}
         }}
@@ -180,8 +181,8 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
         rowSelection={false}
         sx={{
           border: 'none',
-          marginTop: 1,
           fontFamily:
+            // eslint-disable-next-line
             "'M PLUS 1p','Roboto','Noto Sans JP', 'Helvetica Neue', 'Helvetica', 'Hiragino Sans', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif",
           color: '#333',
           '& .small-header': {

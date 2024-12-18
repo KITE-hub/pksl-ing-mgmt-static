@@ -21,16 +21,16 @@ function DishSelect({
   result
 }: DishSelectProps) {
   return (
-    <div key={index} className="DishSelect mt-3 mb-4 w-[360px]">
+    <div key={index} className="DishSelect mt-3 w-[360px]">
       <div className="flex items-center mx-auto mb-2">
         <div className="flex ml-auto mr-2">
           {index > 0 && (
             <button onClick={() => updateDishOrder(category, 'delete', index)}>
-              <RemoveIcon />
+              <RemoveIcon sx={{color: '#555'}} />
             </button>
           )}
           <button onClick={() => updateDishOrder(category, 'add', index)}>
-            <AddIcon />
+            <AddIcon sx={{color: '#555'}} />
           </button>
         </div>
         <FormControl>
@@ -72,7 +72,7 @@ function DishSelect({
                       {Object.keys(option.ingredients).map((ingredient) => {
                         const resultItem = result.find((item) => item.ingName === ingredient);
                         return resultItem ? (
-                          <Box key={ingredient} display="flex" alignItems="center" marginRight="3px">
+                          <Box key={ingredient} display="flex" alignItems="center" marginRight="10px">
                             <img
                               src={`${process.env.PUBLIC_URL || ''}${resultItem.ingImage}`}
                               alt={ingredient}

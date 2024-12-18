@@ -18,10 +18,21 @@ const dishDataSalad: iDishData[] = Salad as iDishData[];
 const dishDataDessert: iDishData[] = Dessert as iDishData[];
 
 function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const [isOrderOpen, setIsOrderOpen] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const storedIsOrderOpen = localStorage.getItem('isOrderOpen');
+      return storedIsOrderOpen ? JSON.parse(storedIsOrderOpen) : true;
+    }
+    return true;
+  });
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isOrderOpen', JSON.stringify(isOrderOpen));
+    }
+  }, [isOrderOpen]);
+  const orderRef = useRef<HTMLDivElement | null>(null);
+  const toggleOrder = () => {
+    setIsOrderOpen(!isOrderOpen);
   };
 
   const [dishOrderCurry, setDishOrderCurry] = useState<iDishOrder[]>([{name: '', count: 0}]);
@@ -166,22 +177,22 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
   }, [dishOrderCurry, dishOrderSalad, dishOrderDessert, result, isMaximumMode, memoizedSetResult]);
 
   return (
-    <div className="DishOrderInput mt-6 mb-10 mx-auto">
+    <div className="DishOrderInput mt-4 mb-6 mx-auto">
       <ThemeProvider theme={DishOrderInputTheme}>
         <CssBaseline />
-        <div className="flex" onClick={toggleMenu}>
+        <div className="flex cursor-pointer" onClick={toggleOrder}>
           <span className="bg-[#f6b84b] w-1.5 mr-1.5"></span>
           <div className="flex justify-between text-white bg-[#f6b84b] px-2 w-full clipSlant">
             <h3 className="font-bold">メニュー入力</h3>
-            {isMenuOpen ? (
+            {isOrderOpen ? (
               <KeyboardArrowUpIcon style={{color: 'white', alignSelf: 'center'}} />
             ) : (
               <KeyboardArrowDownIcon style={{color: 'white', alignSelf: 'center'}} />
             )}
           </div>
         </div>
-        <Collapse in={isMenuOpen} timeout="auto" unmountOnExit>
-          <div ref={menuRef}>
+        <Collapse in={isOrderOpen} timeout="auto" unmountOnExit>
+          <div ref={orderRef}>
             {/* DishOrderDisplayNarrow か DishOrderDisplayWide のどちらかしか表示されない(レスポンシブ) */}
             <DishOrderDisplayNarrow
               updateDishOrder={updateDishOrder}
