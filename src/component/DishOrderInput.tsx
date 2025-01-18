@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useCallback} from 'react';
+import {useEffect, useRef, useCallback} from 'react';
 import {iDishData, DishOrderInputProps, iDishOrder, iResult} from '../types';
 import Salad from '../db/Salad.json';
 import Curry from '../db/Curry.json';
@@ -99,39 +99,38 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
   const calculateTotalTargetIngCount = (
     item: iResult,
     dishOrder: iDishOrder[],
-    dishData: iDishData[],
-    totalTargetIngCount: number
-  ) => {
+    dishData: iDishData[]
+  ): number => {
+    let totalTargetIngCount = 0;
     dishOrder.forEach((dish) => {
       const dishDataItem: iDishData | undefined = dishData.find((d) => d.name === dish.name);
       if (!dishDataItem) return;
-
       const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
       if (ingredientCount) {
         totalTargetIngCount += dish.count * ingredientCount; // 合計を計算
       }
     });
+    return totalTargetIngCount;
   };
+  
   useEffect(() => {
     if (dishOrderCurry.length === 0 && dishOrderSalad.length === 0 && dishOrderDessert.length === 0) return; // すべてのdishOrderが空の場合は何もしない
+  
     const updatedResult = result.map((item) => {
-      let totalCurryTargetIngCount = 0;
-      let totalSaladTargetIngCount = 0;
-      let totalDessertTargetIngCount = 0;
-      calculateTotalTargetIngCount(item, dishOrderCurry, dishDataCurry, totalCurryTargetIngCount);
-      calculateTotalTargetIngCount(item, dishOrderSalad, dishDataSalad, totalSaladTargetIngCount);
-      calculateTotalTargetIngCount(item, dishOrderDessert, dishDataDessert, totalDessertTargetIngCount);
+      const totalCurryTargetIngCount = calculateTotalTargetIngCount(item, dishOrderCurry, dishDataCurry);
+      const totalSaladTargetIngCount = calculateTotalTargetIngCount(item, dishOrderSalad, dishDataSalad);
+      const totalDessertTargetIngCount = calculateTotalTargetIngCount(item, dishOrderDessert, dishDataDessert);
       let totalTargetIngCount;
       if (isMaximumMode) {
         totalTargetIngCount = Math.max(totalCurryTargetIngCount, totalSaladTargetIngCount, totalDessertTargetIngCount);
       } else {
         totalTargetIngCount = totalCurryTargetIngCount + totalSaladTargetIngCount + totalDessertTargetIngCount;
       }
-      const diffIngCount = item.nowIngCount - item.targetIngCount;
+      const diffIngCount = item.nowIngCount - totalTargetIngCount;
       return {
         ...item,
         targetIngCount: totalTargetIngCount > 0 ? totalTargetIngCount : 0, // 合計が0の場合は0を代入
-        diffIngCount: diffIngCount
+        diffIngCount: diffIngCount,
       };
     });
     // resultが変更された場合のみsetResultを呼び出す
@@ -139,7 +138,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
       memoizedSetResult(updatedResult);
     }
   }, [dishOrderCurry, dishOrderSalad, dishOrderDessert, result, isMaximumMode, memoizedSetResult]);
-
+  
   return (
     <div className="DishOrderInput mt-4 mb-6 mx-auto">
       <ThemeProvider theme={DishOrderInputTheme}>

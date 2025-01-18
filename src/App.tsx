@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useCallback} from 'react';
 import Description from './component/Description';
 import TextInput from './component/TextInput';
 import DishOrderInput from './component/DishOrderInput';
