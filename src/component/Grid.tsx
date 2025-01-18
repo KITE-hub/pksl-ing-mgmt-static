@@ -1,4 +1,3 @@
-import React from 'react';
 import {DataGrid, GridRowsProp, GridColDef} from '@mui/x-data-grid';
 import {GridProps} from '../types';
 import Switch from './Switch';
@@ -17,13 +16,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
         return (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '3px'
-            }}
-          >
+          <div className="flex items-center gap-[3px]">
             {isTotalRow ? (
               <div />
             ) : (
@@ -55,9 +48,9 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
     {
       field: 'nowIngCount',
       renderHeader: () => (
-        <div style={{textAlign: 'center'}}>
+        <div className="text-center">
           食材数 <br />
-          <span style={{fontSize: '13px'}}>(現在)</span>
+          <span className="text-[13px]">(現在)</span>
         </div>
       ),
       flex: 95,
@@ -103,9 +96,9 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
     {
       field: 'diffIngCount',
       renderHeader: () => (
-        <div style={{textAlign: 'center'}}>
+        <div className="text-center">
           食材数 <br />
-          <span style={{fontSize: '13px'}}>(差分)</span>
+          <span className="text-[13px]">(差分)</span>
         </div>
       ),
       flex: 95,

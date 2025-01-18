@@ -38,11 +38,11 @@ function DishSelect({
         <div className="flex ml-auto mr-2">
           {index > 0 && (
             <button onClick={() => updateDishOrder(category, 'delete', index)}>
-              <RemoveIcon sx={{color: '#555'}} />
+              <RemoveIcon sx={{color: '#666'}} />
             </button>
           )}
           <button onClick={() => updateDishOrder(category, 'add', index)}>
-            <AddIcon sx={{color: '#555'}} />
+            <AddIcon sx={{color: '#666'}} />
           </button>
         </div>
         <FormControl>

@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import {useState, useEffect, useRef, useCallback} from 'react';
 import {iDishData, DishOrderInputProps, iDishOrder, iResult} from '../types';
 import Salad from '../db/Salad.json';
 import Curry from '../db/Curry.json';
 import Dessert from '../db/Dessert.json';
+import {useLocalStorageState} from './UseLocalStorageState';
 import {ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Collapse from '@mui/material/Collapse';
@@ -18,50 +19,21 @@ const dishDataSalad: iDishData[] = Salad as iDishData[];
 const dishDataDessert: iDishData[] = Dessert as iDishData[];
 
 function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps) {
-  const [isOrderOpen, setIsOrderOpen] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      const storedIsOrderOpen = localStorage.getItem('isOrderOpen');
-      return storedIsOrderOpen ? JSON.parse(storedIsOrderOpen) : true;
-    }
-    return true;
-  });
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('isOrderOpen', JSON.stringify(isOrderOpen));
-    }
-  }, [isOrderOpen]);
+  const [isOrderOpen, setIsOrderOpen] = useLocalStorageState<boolean>('isOrderOpen', true);
   const orderRef = useRef<HTMLDivElement | null>(null);
   const toggleOrder = () => {
     setIsOrderOpen(!isOrderOpen);
   };
 
-  const [dishOrderCurry, setDishOrderCurry] = useState<iDishOrder[]>([{name: '', count: 0}]);
-  const [dishOrderSalad, setDishOrderSalad] = useState<iDishOrder[]>([{name: '', count: 0}]);
-  const [dishOrderDessert, setDishOrderDessert] = useState<iDishOrder[]>([{name: '', count: 0}]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedDishOrderCurry = localStorage.getItem('dishOrderCurry');
-      const storedDishOrderSalad = localStorage.getItem('dishOrderSalad');
-      const storedDishOrderDessert = localStorage.getItem('dishOrderDessert');
-      if (storedDishOrderCurry) {
-        setDishOrderCurry(JSON.parse(storedDishOrderCurry));
-      }
-      if (storedDishOrderSalad) {
-        setDishOrderSalad(JSON.parse(storedDishOrderSalad));
-      }
-      if (storedDishOrderDessert) {
-        setDishOrderDessert(JSON.parse(storedDishOrderDessert));
-      }
-    }
-  }, []); // 初回レンダリング時のみ実行
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('dishOrderCurry', JSON.stringify(dishOrderCurry));
-      localStorage.setItem('dishOrderSalad', JSON.stringify(dishOrderSalad));
-      localStorage.setItem('dishOrderDessert', JSON.stringify(dishOrderDessert));
-    }
-  }, [dishOrderCurry, dishOrderSalad, dishOrderDessert]);
+  const [dishOrderCurry, setDishOrderCurry] = useLocalStorageState<iDishOrder[]>('dishOrderCurry', [
+    {name: '', count: 0}
+  ]);
+  const [dishOrderSalad, setDishOrderSalad] = useLocalStorageState<iDishOrder[]>('dishOrderSalad', [
+    {name: '', count: 0}
+  ]);
+  const [dishOrderDessert, setDishOrderDessert] = useLocalStorageState<iDishOrder[]>('dishOrderDessert', [
+    {name: '', count: 0}
+  ]);
 
   const updateDishState = (
     category: 'Curry' | 'Salad' | 'Dessert',
@@ -124,39 +96,31 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
     [setResult]
   );
 
+  const calculateTotalTargetIngCount = (
+    item: iResult,
+    dishOrder: iDishOrder[],
+    dishData: iDishData[],
+    totalTargetIngCount: number
+  ) => {
+    dishOrder.forEach((dish) => {
+      const dishDataItem: iDishData | undefined = dishData.find((d) => d.name === dish.name);
+      if (!dishDataItem) return;
+
+      const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
+      if (ingredientCount) {
+        totalTargetIngCount += dish.count * ingredientCount; // 合計を計算
+      }
+    });
+  };
   useEffect(() => {
     if (dishOrderCurry.length === 0 && dishOrderSalad.length === 0 && dishOrderDessert.length === 0) return; // すべてのdishOrderが空の場合は何もしない
     const updatedResult = result.map((item) => {
       let totalCurryTargetIngCount = 0;
       let totalSaladTargetIngCount = 0;
       let totalDessertTargetIngCount = 0;
-      dishOrderCurry.forEach((dish) => {
-        const dishDataItem: iDishData | undefined = dishDataCurry.find((d) => d.name === dish.name);
-        if (!dishDataItem) return;
-
-        const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
-        if (ingredientCount) {
-          totalCurryTargetIngCount += dish.count * ingredientCount; // 合計を計算
-        }
-      });
-      dishOrderSalad.forEach((dish) => {
-        const dishDataItem: iDishData | undefined = dishDataSalad.find((d) => d.name === dish.name);
-        if (!dishDataItem) return;
-
-        const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
-        if (ingredientCount) {
-          totalSaladTargetIngCount += dish.count * ingredientCount; // 合計を計算
-        }
-      });
-      dishOrderDessert.forEach((dish) => {
-        const dishDataItem: iDishData | undefined = dishDataDessert.find((d) => d.name === dish.name);
-        if (!dishDataItem) return;
-
-        const ingredientCount: number | undefined = dishDataItem.ingredients[item.ingName];
-        if (ingredientCount) {
-          totalDessertTargetIngCount += dish.count * ingredientCount; // 合計を計算
-        }
-      });
+      calculateTotalTargetIngCount(item, dishOrderCurry, dishDataCurry, totalCurryTargetIngCount);
+      calculateTotalTargetIngCount(item, dishOrderSalad, dishDataSalad, totalSaladTargetIngCount);
+      calculateTotalTargetIngCount(item, dishOrderDessert, dishDataDessert, totalDessertTargetIngCount);
       let totalTargetIngCount;
       if (isMaximumMode) {
         totalTargetIngCount = Math.max(totalCurryTargetIngCount, totalSaladTargetIngCount, totalDessertTargetIngCount);

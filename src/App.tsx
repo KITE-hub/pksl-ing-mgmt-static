@@ -3,42 +3,17 @@ import Description from './component/Description';
 import TextInput from './component/TextInput';
 import DishOrderInput from './component/DishOrderInput';
 import Grid from './component/Grid';
-import ResultInitialState from './db/ResultInitialState';
+import {useLocalStorageState} from './component/UseLocalStorageState';
 import {iResult} from './types';
+import ResultInitialState from './db/ResultInitialState.json';
 
 function App() {
-  const [result, setResult] = useState<iResult[]>(ResultInitialState);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedResult = localStorage.getItem('result');
-      if (storedResult) {
-        setResult(JSON.parse(storedResult));
-      }
-    }
-  }, []);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('result', JSON.stringify(result));
-    }
-  }, [result]);
+  const [result, setResult] = useLocalStorageState<iResult[]>('result', ResultInitialState);
   const memoizedSetResult = useCallback((newResult: iResult[]) => {
     setResult(newResult);
   }, []);
 
-  const [isMaximumMode, setIsMaximumMode] = useState<boolean>(false);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedIsMaximumMode = localStorage.getItem('isMaximumMode');
-      if (storedIsMaximumMode) {
-        setIsMaximumMode(JSON.parse(storedIsMaximumMode));
-      }
-    }
-  }, []);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('isMaximumMode', JSON.stringify(isMaximumMode));
-    }
-  }, [isMaximumMode]);
+  const [isMaximumMode, setIsMaximumMode] = useLocalStorageState<boolean>('IsMaximumMode', false);
 
   return (
     <div className="App">
