@@ -3,7 +3,9 @@ import {InputProps} from '../types';
 import Collapse from '@mui/material/Collapse';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import {StyledTextInputField, StyledDeleteIcon} from './MUIStyledComponents';
+import {StyledTextInputField} from './MUIStyledComponents';
+import {IconButton} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {iResult} from '../types';
 import {debounce} from 'lodash';
 
@@ -225,11 +227,15 @@ function TextInput({result, setResult}: InputProps) {
         <div ref={inputRef} className="flex">
           <div className="w-6/12">
             <StyledTextInputField multiline rows={4} value={inputValue.join('\n')} onChange={handleInputChange} />
-            <StyledDeleteIcon onClick={clearInputValue} />
+            <IconButton aria-label="actions" onClick={clearInputValue} sx={{display: 'block', margin: '0px auto'}}>
+              <DeleteIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+            </IconButton>
           </div>
           <div className="w-6/12">
             <StyledTextInputField multiline rows={4} value={inputValue2.join('\n')} onChange={handleInputChange2} />
-            <StyledDeleteIcon onClick={clearInputValue2} />
+            <IconButton aria-label="actions" onClick={clearInputValue2} sx={{display: 'block', margin: '0px auto'}}>
+              <DeleteIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+            </IconButton>
           </div>
         </div>
       </Collapse>

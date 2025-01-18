@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": true, //window変数とか許可する
+    "browser": true,
     "node": true,
     "es2021": true
   },

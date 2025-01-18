@@ -30,6 +30,10 @@ function Description() {
   const ingMgmtClick = () => {
     setMoreMenuAnchor(null);
   };
+  const SlpCtrlClick = () => {
+    setMoreMenuAnchor(null);
+    window.location.href = 'https://kite-hub.github.io/pksl-slp-ctrl/';
+  };
   const moreButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     setMoreMenuAnchor(event.currentTarget);
   };
@@ -98,6 +102,12 @@ function Description() {
               <CheckIcon />
             </ListItemIcon>
             食材管理ツール
+          </MenuItem>
+          <MenuItem onClick={SlpCtrlClick}>
+            <ListItemIcon>
+              <Icon />
+            </ListItemIcon>
+            睡眠管理ツール
           </MenuItem>
           <Divider />
           <MenuItem onClick={howToMenuClick}>

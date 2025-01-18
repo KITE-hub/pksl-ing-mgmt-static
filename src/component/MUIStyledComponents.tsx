@@ -1,7 +1,4 @@
 import {Select, MenuItem, TextField, Button, DialogTitle, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {styled} from '@mui/material/styles';
 import {createTheme} from '@mui/material/styles';
 
@@ -30,20 +27,6 @@ export const StyledTextInputField = styled(TextField)({
     '&.Mui-focused fieldset': {
       borderColor: '#25d76b'
     }
-  }
-});
-
-export const StyledDeleteIcon = styled(DeleteIcon)({
-  width: '35px',
-  height: '35px',
-  cursor: 'pointer',
-  color: '#555',
-  borderRadius: '9999px',
-  display: 'block',
-  margin: '5px auto 0px auto',
-  padding: '5px',
-  '&:hover': {
-    backgroundColor: '#E8EBEF'
   }
 });
 
@@ -90,38 +73,18 @@ export const StyledMenuItem = styled(MenuItem)(() => ({
   alignItems: 'flex-start', // 左寄せ
   padding: '8px 16px', // MenuItemの余白調整
   whiteSpace: 'normal', // テキストが改行されるように
-  '&:hover': {
-    backgroundColor: 'hsl(143, 70%, 95%)' // hover時の背景色
-  },
   '&.Mui-selected': {
-    backgroundColor: 'hsl(143, 70%, 98%)',
-    transition: 'none'
+    backgroundColor: 'white',
+    borderColor: '#25d76b',
+    '&:hover': {
+      backgroundColor: 'hsl(143, 70%, 95%)' // 選択状態かつホバー　'#D3F7E1'
+    }
   },
-  '&.Mui-selected:hover': {
-    backgroundColor: 'hsl(143, 70%, 95%)',
-    transition: 'none'
-  }
-}));
-
-export const StyledNavigateNextIcon = styled(NavigateNextIcon)(() => ({
-  borderRadius: '9999px',
-  color: '#555',
-  width: '35px',
-  height: '35px',
-  padding: '5px',
+  '&.Mui-selected:not(:hover)': {
+    backgroundColor: 'hsl(143, 70%, 98%)' // 選択中かつホバーしていない
+  },
   '&:hover': {
-    backgroundColor: '#E8EBEF'
-  }
-}));
-
-export const StyledNavigateBeforeIcon = styled(NavigateBeforeIcon)(() => ({
-  borderRadius: '9999px',
-  color: '#555',
-  width: '35px',
-  height: '35px',
-  padding: '5px',
-  '&:hover': {
-    backgroundColor: '#E8EBEF'
+    backgroundColor: 'hsl(143, 70%, 95%)' // 選択していないかつホバー
   }
 }));
 

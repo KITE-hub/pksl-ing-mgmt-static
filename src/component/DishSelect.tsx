@@ -4,12 +4,24 @@ import Curry from '../db/Curry.json';
 import Dessert from '../db/Dessert.json';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import {StyledSelect, StyledMenuItem, StyledNavigateBeforeIcon, StyledNavigateNextIcon} from './MUIStyledComponents';
-import {Box, Typography, FormControl} from '@mui/material';
+import {StyledSelect, StyledMenuItem} from './MUIStyledComponents';
+import {Box, Typography, FormControl, IconButton} from '@mui/material';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const dishDataCurry: iDishData[] = Curry as iDishData[];
 const dishDataSalad: iDishData[] = Salad as iDishData[];
 const dishDataDessert: iDishData[] = Dessert as iDishData[];
+
+const menuProps = {
+  PaperProps: {
+    style: {
+      boxShadow: 'none',
+      border: '1px solid #25d76b',
+      borderRadius: '8px'
+    }
+  }
+};
 
 function DishSelect({
   dish,
@@ -34,7 +46,12 @@ function DishSelect({
           </button>
         </div>
         <FormControl>
-          <StyledSelect value={dish.name} onChange={(event) => handleSelectChange(event, category, index)} displayEmpty>
+          <StyledSelect
+            MenuProps={menuProps}
+            value={dish.name}
+            onChange={(event) => handleSelectChange(event, category, index)}
+            displayEmpty
+          >
             {(category === 'Curry' ? dishDataCurry : category === 'Salad' ? dishDataSalad : dishDataDessert).map(
               (option) => {
                 const totalIngredients = Object.values(option.ingredients).reduce((a, b) => a + b, 0);
@@ -100,12 +117,12 @@ function DishSelect({
           onChange={(e) => handleCountChange(category, index, parseInt(e.target.value, 10) || 0)}
           className="font-bold mr-2 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
         />
-        <button onClick={() => handleCountChange(category, index, dish.count - 1)}>
-          <StyledNavigateBeforeIcon />
-        </button>
-        <button onClick={() => handleCountChange(category, index, dish.count + 1)}>
-          <StyledNavigateNextIcon />
-        </button>
+        <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count - 1)}>
+          <NavigateBeforeIcon sx={{color: '#666'}} />
+        </IconButton>
+        <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 1)}>
+          <NavigateNextIcon sx={{color: '#666'}} />
+        </IconButton>
       </div>
     </div>
   );
