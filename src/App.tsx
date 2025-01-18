@@ -1,10 +1,9 @@
-import React from 'react';
 import {useState, useEffect, useCallback} from 'react';
 import Description from './component/Description';
 import TextInput from './component/TextInput';
 import DishOrderInput from './component/DishOrderInput';
 import Grid from './component/Grid';
-import ResultInitialState from './db/ResultInitialState.json';
+import ResultInitialState from './db/ResultInitialState';
 import {iResult} from './types';
 
 function App() {

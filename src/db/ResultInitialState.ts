@@ -1,4 +1,6 @@
-[
+import {iResult} from '../types';
+
+const ResultInitialState: iResult[] = [
   {
     "ingName": "ふといながねぎ",
     "ingImage": "/ingredients/1.png",
@@ -119,3 +121,5 @@
     "diffIngCount": 0
   }
 ]
+
+export default ResultInitialState;
