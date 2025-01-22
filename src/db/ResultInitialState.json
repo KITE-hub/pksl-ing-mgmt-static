@@ -2,6 +2,7 @@
   {
     "ingName": "ふといながねぎ",
     "ingImage": "/ingredients/1.png",
+    "ingEP": 185,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -9,6 +10,7 @@
   {
     "ingName": "あじわいキノコ",
     "ingImage": "/ingredients/2.png",
+    "ingEP": 167,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -16,6 +18,7 @@
   {
     "ingName": "とくせんエッグ",
     "ingImage": "/ingredients/3.png",
+    "ingEP": 115,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -23,6 +26,7 @@
   {
     "ingName": "ほっこりポテト",
     "ingImage": "/ingredients/4.png",
+    "ingEP": 124,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -30,6 +34,7 @@
   {
     "ingName": "とくせんリンゴ",
     "ingImage": "/ingredients/5.png",
+    "ingEP": 90,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -37,6 +42,7 @@
   {
     "ingName": "げきからハーブ",
     "ingImage": "/ingredients/6.png",
+    "ingEP": 130,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -44,6 +50,7 @@
   {
     "ingName": "マメミート",
     "ingImage": "/ingredients/7.png",
+    "ingEP": 103,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -51,6 +58,7 @@
   {
     "ingName": "モーモーミルク",
     "ingImage": "/ingredients/8.png",
+    "ingEP": 98,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -58,6 +66,7 @@
   {
     "ingName": "あまいミツ",
     "ingImage": "/ingredients/9.png",
+    "ingEP": 101,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -65,6 +74,7 @@
   {
     "ingName": "ピュアなオイル",
     "ingImage": "/ingredients/10.png",
+    "ingEP": 121,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -72,6 +82,7 @@
   {
     "ingName": "あったかジンジャー",
     "ingImage": "/ingredients/11.png",
+    "ingEP": 109,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -79,6 +90,7 @@
   {
     "ingName": "あんみんトマト",
     "ingImage": "/ingredients/12.png",
+    "ingEP": 110,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -86,6 +98,7 @@
   {
     "ingName": "リラックスカカオ",
     "ingImage": "/ingredients/13.png",
+    "ingEP": 151,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -93,6 +106,7 @@
   {
     "ingName": "おいしいシッポ",
     "ingImage": "/ingredients/14.png",
+    "ingEP": 342,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -100,6 +114,7 @@
   {
     "ingName": "ワカクサ大豆",
     "ingImage": "/ingredients/15.png",
+    "ingEP": 100,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -107,6 +122,7 @@
   {
     "ingName": "ワカクサコーン",
     "ingImage": "/ingredients/16.png",
+    "ingEP": 140,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0
@@ -114,6 +130,7 @@
   {
     "ingName": "めざましコーヒー",
     "ingImage": "/ingredients/17.png",
+    "ingEP": 153,
     "nowIngCount": 0,
     "targetIngCount": 0,
     "diffIngCount": 0

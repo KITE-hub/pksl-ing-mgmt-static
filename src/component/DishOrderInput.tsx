@@ -1,5 +1,5 @@
 import {useEffect, useRef, useCallback} from 'react';
-import {iDishData, DishOrderInputProps, iDishOrder, iResult} from '../types';
+import {iDishData, DishOrderInputProps, iDishOrder, IResult} from '../types';
 import Salad from '../db/Salad.json';
 import Curry from '../db/Curry.json';
 import Dessert from '../db/Dessert.json';
@@ -90,17 +90,13 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
   };
 
   const memoizedSetResult = useCallback(
-    (newResult: iResult[]) => {
+    (newResult: IResult[]) => {
       setResult(newResult);
     },
     [setResult]
   );
 
-  const calculateTotalTargetIngCount = (
-    item: iResult,
-    dishOrder: iDishOrder[],
-    dishData: iDishData[]
-  ): number => {
+  const calculateTotalTargetIngCount = (item: IResult, dishOrder: iDishOrder[], dishData: iDishData[]): number => {
     let totalTargetIngCount = 0;
     dishOrder.forEach((dish) => {
       const dishDataItem: iDishData | undefined = dishData.find((d) => d.name === dish.name);
@@ -112,10 +108,10 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
     });
     return totalTargetIngCount;
   };
-  
+
   useEffect(() => {
     if (dishOrderCurry.length === 0 && dishOrderSalad.length === 0 && dishOrderDessert.length === 0) return; // すべてのdishOrderが空の場合は何もしない
-  
+
     const updatedResult = result.map((item) => {
       const totalCurryTargetIngCount = calculateTotalTargetIngCount(item, dishOrderCurry, dishDataCurry);
       const totalSaladTargetIngCount = calculateTotalTargetIngCount(item, dishOrderSalad, dishDataSalad);
@@ -130,7 +126,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
       return {
         ...item,
         targetIngCount: totalTargetIngCount > 0 ? totalTargetIngCount : 0, // 合計が0の場合は0を代入
-        diffIngCount: diffIngCount,
+        diffIngCount: diffIngCount
       };
     });
     // resultが変更された場合のみsetResultを呼び出す
@@ -138,7 +134,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
       memoizedSetResult(updatedResult);
     }
   }, [dishOrderCurry, dishOrderSalad, dishOrderDessert, result, isMaximumMode, memoizedSetResult]);
-  
+
   return (
     <div className="DishOrderInput mt-4 mb-6 mx-auto">
       <ThemeProvider theme={DishOrderInputTheme}>

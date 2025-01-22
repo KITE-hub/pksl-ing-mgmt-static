@@ -4,12 +4,12 @@ import TextInput from './component/TextInput';
 import DishOrderInput from './component/DishOrderInput';
 import Grid from './component/Grid';
 import {useLocalStorageState} from './component/UseLocalStorageState';
-import {iResult} from './types';
+import {IResult} from './types';
 import ResultInitialState from './db/ResultInitialState.json';
 
 function App() {
-  const [result, setResult] = useLocalStorageState<iResult[]>('result', ResultInitialState);
-  const memoizedSetResult = useCallback((newResult: iResult[]) => {
+  const [result, setResult] = useLocalStorageState<IResult[]>('result', ResultInitialState);
+  const memoizedSetResult = useCallback((newResult: IResult[]) => {
     setResult(newResult);
   }, []);
 

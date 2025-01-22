@@ -318,15 +318,15 @@ function Description() {
               <div>
                 {'　'}
                 このツールは、{' '}
-                <Link href="https://x.com/mdk_pksldev" underline="hover" target="_blank" rel="noopener noreferrer">
+                <Link href="https://x.com/mdk_pksldev2" underline="hover" target="_blank" rel="noopener noreferrer">
                   擬き(もどき)
                 </Link>{' '}
                 が個人で開発した非公式のツールです。
                 <br />
                 {'　'}
                 不具合報告や要望等は、X (twitter) の{' '}
-                <Link href="https://x.com/mdk_pksldev" underline="hover" target="_blank" rel="noopener noreferrer">
-                  @mdk_pksldev (現在凍結中)
+                <Link href="https://x.com/mdk_pksldev2" underline="hover" target="_blank" rel="noopener noreferrer">
+                  @mdk_pksldev
                 </Link>{' '}
                 のDMや、
                 <Link

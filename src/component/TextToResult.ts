@@ -1,4 +1,4 @@
-import {iResult} from '../types';
+import {IResult} from '../types';
 
 export const ingredientsReadList: {[key: string]: number} = {
   ながねぎ: 0,
@@ -83,8 +83,8 @@ export const updateResult = (
   numbers: number[],
   ingredients2: string[],
   numbers2: number[],
-  result: iResult[]
-): iResult[] => {
+  result: IResult[]
+): IResult[] => {
   const updatedResult = result.map((item) => ({...item, nowIngCount: 0}));
 
   const updateIngredients = (ingredients: string[], numbers: number[]) => {

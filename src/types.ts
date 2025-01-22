@@ -1,8 +1,9 @@
 import {SelectChangeEvent} from '@mui/material';
 
-export interface iResult {
+export interface IResult {
   ingName: string;
   ingImage: string;
+  ingEP: number;
   nowIngCount: number;
   targetIngCount: number;
   diffIngCount: number;
@@ -17,19 +18,19 @@ export interface iDishData {
 }
 
 export interface InputProps {
-  result: iResult[];
-  setResult: (result: iResult[]) => void;
+  result: IResult[];
+  setResult: (result: IResult[]) => void;
 }
 
 export interface GridProps {
-  result: iResult[];
+  result: IResult[];
   isMaximumMode: boolean;
   setIsMaximumMode: (isMaximumMode: boolean) => void;
 }
 
 export interface DishOrderInputProps {
-  result: iResult[];
-  setResult: (result: iResult[]) => void;
+  result: IResult[];
+  setResult: (result: IResult[]) => void;
   isMaximumMode: boolean;
 }
 
@@ -44,7 +45,7 @@ export interface DishSelectProps {
     index: number
   ) => void;
   handleCountChange: (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => void;
-  result: iResult[];
+  result: IResult[];
 }
 
 export interface DishOrderDisplayProps {
@@ -58,7 +59,7 @@ export interface DishOrderDisplayProps {
   dishOrderCurry: iDishOrder[];
   dishOrderSalad: iDishOrder[];
   dishOrderDessert: iDishOrder[];
-  result: iResult[];
+  result: IResult[];
 }
 
 export interface iDishOrder {

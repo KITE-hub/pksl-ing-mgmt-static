@@ -9,52 +9,50 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
   }));
   const columns: GridColDef[] = [
     {
-      field: 'nameWithImage',
+      field: 'ingEP',
       headerName: '食材名',
       flex: 140,
-      minWidth: 100,
+      minWidth: 140,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
         return (
-          <div className="flex items-center gap-[3px]">
+          <div>
             {isTotalRow ? (
-              <div />
+              <span className="text-sm font-bold">{params.row.ingName}</span>
             ) : (
-              <img
-                src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
-                alt=""
-                width={30}
-                height={30}
-                style={{
-                  objectFit: 'cover',
-                  marginLeft: '-5px',
-                  borderRadius: '4px'
-                }}
-              />
+              <div className="flex items-center gap-[3px]">
+                <img
+                  src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
+                  alt=""
+                  width={30}
+                  height={30}
+                  style={{
+                    objectFit: 'cover',
+                    marginLeft: '-5px',
+                    borderRadius: '4px'
+                  }}
+                />
+                <div className="flex flex-col space-y-1">
+                  <span className="text-[12px] leading-none">{params.row.ingName}</span>
+                  <span className="text-[10px] leading-none text-[#e69b19] font-bold">EP: {params.row.ingEP}</span>
+                </div>
+              </div>
             )}
-            <span
-              style={{
-                fontSize: isTotalRow ? '14px' : '10px',
-                fontWeight: isTotalRow ? 'bold' : 'normal'
-              }}
-            >
-              {params.row.ingName}
-            </span>
           </div>
         );
       },
-      sortingOrder: ['asc', null]
+      sortingOrder: ['desc', null]
     },
     {
       field: 'nowIngCount',
       renderHeader: () => (
-        <div className="text-center">
+        <div className="text-[13px]">
           食材数 <br />
-          <span className="text-[13px]">(現在)</span>
+          <span>(現在)</span>
         </div>
       ),
-      flex: 95,
-      minWidth: 95,
+      flex: 90,
+      minWidth: 90,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
         return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.nowIngCount}</span>;
@@ -70,51 +68,33 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       }
     },
     {
-      field: 'targetIngCount',
-      renderHeader: () => (
-        <div style={{textAlign: 'center'}}>
-          食材数 <br />
-          <span style={{fontSize: '13px'}}>(目標)</span>
-        </div>
-      ),
-      flex: 95,
-      minWidth: 95,
-      renderCell: (params) => {
-        const isTotalRow = params.row.id === 'total';
-        return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.targetIngCount}</span>;
-      },
-      sortingOrder: ['asc', null],
-      sortComparator: (v1, v2, param1, param2) => {
-        const isTotalRow1 = param1.id === 'total';
-        const isTotalRow2 = param2.id === 'total';
-
-        if (isTotalRow1 && !isTotalRow2) return 1; // 'total'行を一番下に
-        if (!isTotalRow1 && isTotalRow2) return -1; // 'total'行を一番下に
-        return v1 - v2; // 通常の数値ソート
-      }
-    },
-    {
       field: 'diffIngCount',
       renderHeader: () => (
-        <div className="text-center">
+        <div className="text-[13px]">
           食材数 <br />
-          <span className="text-[13px]">(差分)</span>
+          <span>(目標, 差分)</span>
         </div>
       ),
-      flex: 95,
-      minWidth: 95,
+      flex: 120,
+      minWidth: 120,
       renderCell: (params) => {
-        const isNegative = params.value < 0;
+        const isNegative = params.row.diffIngCount < 0;
         const isTotalRow = params.row.id === 'total';
         return (
-          <span
-            style={{
-              color: isNegative ? 'red' : '#333',
-              fontWeight: isTotalRow ? 'bold' : 'normal'
-            }}
-          >
-            {params.value > 0 ? `+${params.value}` : params.value}
-          </span>
+          <div className="flex items-center">
+            <div className="w-14" style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>
+              {params.row.targetIngCount}
+            </div>
+            <div
+              className="text-[12px]"
+              style={{
+                color: isNegative ? 'red' : '#333',
+                fontWeight: isTotalRow ? 'bold' : 'normal'
+              }}
+            >
+              ({params.row.diffIngCount >= 0 ? `+${params.row.diffIngCount}` : params.row.diffIngCount})
+            </div>
+          </div>
         );
       },
       sortingOrder: ['asc', null],
@@ -127,6 +107,40 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
         return v1 - v2; // 通常の数値ソート
       }
     }
+    // {
+    //   field: 'diffIngCount',
+    //   renderHeader: () => (
+    //     <div className="text-center text-[13px]">
+    //       食材数 <br />
+    //       <span>(差分)</span>
+    //     </div>
+    //   ),
+    //   flex: 90,
+    //   minWidth: 90,
+    //   renderCell: (params) => {
+    //     const isNegative = params.value < 0;
+    //     const isTotalRow = params.row.id === 'total';
+    //     return (
+    //       <span
+    //         style={{
+    //           color: isNegative ? 'red' : '#333',
+    //           fontWeight: isTotalRow ? 'bold' : 'normal'
+    //         }}
+    //       >
+    //         {params.value > 0 ? `+${params.value}` : params.value}
+    //       </span>
+    //     );
+    //   },
+    //   sortingOrder: ['asc', null],
+    //   sortComparator: (v1, v2, param1, param2) => {
+    //     const isTotalRow1 = param1.id === 'total';
+    //     const isTotalRow2 = param2.id === 'total';
+
+    //     if (isTotalRow1 && !isTotalRow2) return 1; // 'total'行を一番下に
+    //     if (!isTotalRow1 && isTotalRow2) return -1; // 'total'行を一番下に
+    //     return v1 - v2; // 通常の数値ソート
+    //   }
+    // }
   ];
 
   const totals = result.reduce(
