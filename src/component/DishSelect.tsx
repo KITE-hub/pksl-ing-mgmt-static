@@ -117,7 +117,10 @@ function DishSelect({
           onChange={(e) => handleCountChange(category, index, parseInt(e.target.value, 10) || 0)}
           className="font-bold mr-2 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
         />
-        <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count - 1)}>
+        <IconButton
+          aria-label="actions"
+          onClick={() => handleCountChange(category, index, Math.max(0, dish.count - 1))}
+        >
           <NavigateBeforeIcon sx={{color: '#666'}} />
         </IconButton>
         <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 1)}>

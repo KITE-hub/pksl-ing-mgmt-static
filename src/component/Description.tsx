@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
@@ -11,7 +11,8 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
-  Link
+  Link,
+  Snackbar
 } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -19,6 +20,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {DescriptionTheme, StyledDialogTitle, StyledButton} from './MUIStyledComponents';
 
 function Description() {
@@ -77,6 +79,22 @@ function Description() {
   const onDevRequestDialogClose = () => {
     setIsDevRequestDialogOpen(false);
   };
+  const [clearStorageMessageVisible, setClearStorageMessageVisible] = useState<boolean>(false);
+  const onClearStorageMessageClose = useCallback(() => {
+    setClearStorageMessageVisible(false);
+  }, [setClearStorageMessageVisible]);
+  const handleClearStorage = () => {
+    localStorage.clear();
+    sessionStorage.setItem('showClearMessage', 'true');
+    window.location.reload();
+  };
+  useEffect(() => {
+    const flag = sessionStorage.getItem('showClearMessage');
+    if (flag === 'true') {
+      setClearStorageMessageVisible(true);
+      sessionStorage.removeItem('showClearMessage');
+    }
+  }, []);
 
   return (
     <div className="Description ml-auto">
@@ -133,6 +151,13 @@ function Description() {
               <InfoOutlinedIcon />
             </ListItemIcon>
             開発者・要望について
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleClearStorage}>
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            ローカルストレージの全削除
           </MenuItem>
         </Menu>
         <Dialog
@@ -346,6 +371,12 @@ function Description() {
             <StyledButton onClick={onDevRequestDialogClose}>閉じる</StyledButton>
           </DialogActions>
         </Dialog>
+        <Snackbar
+          open={clearStorageMessageVisible}
+          autoHideDuration={2000}
+          onClose={onClearStorageMessageClose}
+          message="ローカルストレージを全て削除しました。"
+        />
       </ThemeProvider>
     </div>
   );

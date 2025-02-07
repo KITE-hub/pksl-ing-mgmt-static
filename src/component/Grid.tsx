@@ -1,8 +1,8 @@
-import {DataGrid, GridRowsProp, GridColDef} from '@mui/x-data-grid';
-import {GridProps} from '../types';
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { GridProps } from '../types';
 import Switch from './Switch';
 
-function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
+function Grid({ result, setIsMaximumMode, isMaximumMode }: GridProps) {
   const rows: GridRowsProp = result.map((item, index) => ({
     id: index,
     ...item
@@ -11,30 +11,30 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
     {
       field: 'ingEP',
       headerName: '食材名',
-      flex: 140,
-      minWidth: 140,
+      flex: 160,
+      minWidth: 160,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
         return (
-          <div>
+          <div className="flex items-center h-full">
             {isTotalRow ? (
               <span className="text-sm font-bold">{params.row.ingName}</span>
             ) : (
-              <div className="flex items-center gap-[3px]">
+              <div className="flex items-center h-full">
                 <img
-                  src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
-                  alt=""
-                  width={30}
-                  height={30}
-                  style={{
-                    objectFit: 'cover',
-                    marginLeft: '-5px',
-                    borderRadius: '4px'
-                  }}
-                />
-                <div className="flex flex-col space-y-1">
-                  <span className="text-[12px] leading-none">{params.row.ingName}</span>
-                  <span className="text-[10px] leading-none text-[#e69b19] font-bold">EP: {params.row.ingEP}</span>
+                    src={`${process.env.PUBLIC_URL || ''}${params.row.ingImage}`}
+                    alt=""
+                    width={32}
+                    height={32}
+                    style={{
+                      objectFit: 'cover',
+                      marginLeft: '-5px',
+                      borderRadius: '4px'
+                    }}
+                  />
+                <div className="space-y-0.5">
+                  <div className="text-[12px] leading-none">{params.row.ingName}</div>
+                  <div className="text-[11px] leading-none text-[#e69b19] font-bold">EP: {params.row.ingEP}</div>
                 </div>
               </div>
             )}
@@ -51,11 +51,11 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
           <span>(現在)</span>
         </div>
       ),
-      flex: 90,
-      minWidth: 90,
+      flex: 100,
+      minWidth: 100,
       renderCell: (params) => {
         const isTotalRow = params.row.id === 'total';
-        return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.nowIngCount}</span>;
+        return <span style={{ fontWeight: isTotalRow ? 'bold' : 'normal' }}>{params.row.nowIngCount}</span>;
       },
       sortingOrder: ['asc', null],
       sortComparator: (v1, v2, param1, param2) => {
@@ -75,24 +75,26 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
           <span>(目標, 差分)</span>
         </div>
       ),
-      flex: 120,
-      minWidth: 120,
+      flex: 100,
+      minWidth: 100,
       renderCell: (params) => {
         const isNegative = params.row.diffIngCount < 0;
         const isTotalRow = params.row.id === 'total';
         return (
-          <div className="flex items-center">
-            <div className="w-14" style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>
-              {params.row.targetIngCount}
-            </div>
-            <div
-              className="text-[12px]"
-              style={{
-                color: isNegative ? 'red' : '#333',
-                fontWeight: isTotalRow ? 'bold' : 'normal'
-              }}
-            >
-              ({params.row.diffIngCount >= 0 ? `+${params.row.diffIngCount}` : params.row.diffIngCount})
+          <div className="flex items-center h-full">
+            <div className="space-y-[1px]">
+              <div className="text-[13px] leading-none" style={{ fontWeight: isTotalRow ? 'bold' : 'normal' }}>
+                {params.row.targetIngCount}
+              </div>
+              <div
+                className="text-[11px] leading-none"
+                style={{
+                  color: isNegative ? 'red' : '#333',
+                  fontWeight: isTotalRow ? 'bold' : 'normal'
+                }}
+              >
+                ({params.row.diffIngCount >= 0 ? `+${params.row.diffIngCount}` : params.row.diffIngCount})
+              </div>
             </div>
           </div>
         );
@@ -107,40 +109,6 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
         return v1 - v2; // 通常の数値ソート
       }
     }
-    // {
-    //   field: 'diffIngCount',
-    //   renderHeader: () => (
-    //     <div className="text-center text-[13px]">
-    //       食材数 <br />
-    //       <span>(差分)</span>
-    //     </div>
-    //   ),
-    //   flex: 90,
-    //   minWidth: 90,
-    //   renderCell: (params) => {
-    //     const isNegative = params.value < 0;
-    //     const isTotalRow = params.row.id === 'total';
-    //     return (
-    //       <span
-    //         style={{
-    //           color: isNegative ? 'red' : '#333',
-    //           fontWeight: isTotalRow ? 'bold' : 'normal'
-    //         }}
-    //       >
-    //         {params.value > 0 ? `+${params.value}` : params.value}
-    //       </span>
-    //     );
-    //   },
-    //   sortingOrder: ['asc', null],
-    //   sortComparator: (v1, v2, param1, param2) => {
-    //     const isTotalRow1 = param1.id === 'total';
-    //     const isTotalRow2 = param2.id === 'total';
-
-    //     if (isTotalRow1 && !isTotalRow2) return 1; // 'total'行を一番下に
-    //     if (!isTotalRow1 && isTotalRow2) return -1; // 'total'行を一番下に
-    //     return v1 - v2; // 通常の数値ソート
-    //   }
-    // }
   ];
 
   const totals = result.reduce(
@@ -150,7 +118,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
       acc.diffIngCount += item.diffIngCount;
       return acc;
     },
-    {nowIngCount: 0, targetIngCount: 0, diffIngCount: 0}
+    { nowIngCount: 0, targetIngCount: 0, diffIngCount: 0 }
   );
 
   const rowsWithTotal = [
@@ -181,7 +149,7 @@ function Grid({result, setIsMaximumMode, isMaximumMode}: GridProps) {
         rowHeight={24}
         columnHeaderHeight={32}
         initialState={{
-          pagination: {paginationModel: {pageSize: 100}}
+          pagination: { paginationModel: { pageSize: 100 } }
         }}
         disableColumnMenu={true}
         hideFooter={true}
