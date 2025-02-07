@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pksl-ing-mgmt-static/static/css/main.6f065979.css",
-    "main.js": "/pksl-ing-mgmt-static/static/js/main.9148152e.js",
+    "main.css": "/pksl-ing-mgmt-static/static/css/main.febfecdf.css",
+    "main.js": "/pksl-ing-mgmt-static/static/js/main.e0cb7407.js",
     "static/js/453.562b9e8c.chunk.js": "/pksl-ing-mgmt-static/static/js/453.562b9e8c.chunk.js",
     "index.html": "/pksl-ing-mgmt-static/index.html",
-    "main.6f065979.css.map": "/pksl-ing-mgmt-static/static/css/main.6f065979.css.map",
-    "main.9148152e.js.map": "/pksl-ing-mgmt-static/static/js/main.9148152e.js.map",
+    "main.febfecdf.css.map": "/pksl-ing-mgmt-static/static/css/main.febfecdf.css.map",
+    "main.e0cb7407.js.map": "/pksl-ing-mgmt-static/static/js/main.e0cb7407.js.map",
     "453.562b9e8c.chunk.js.map": "/pksl-ing-mgmt-static/static/js/453.562b9e8c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f065979.css",
-    "static/js/main.9148152e.js"
+    "static/css/main.febfecdf.css",
+    "static/js/main.e0cb7407.js"
   ]
 }
