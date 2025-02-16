@@ -5,12 +5,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {StyledTextInputField} from './MUIStyledComponents';
 import {IconButton} from '@mui/material';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useLocalStorageState} from './UseLocalStorageState';
 import {useDebounce} from './UseDebounce';
 import {extractIngredientsAndNumbers, validateAndParseNumbers, updateResult} from './TextToResult';
 
-function TextInput({result, setResult}: InputProps) {
+function TextInput({result, setResult, handlePaste}: InputProps) {
   const [isInputOpen, setIsInputOpen] = useLocalStorageState<boolean>('isInputOpen', true);
   const [inputValue, setInputValue] = useLocalStorageState<string[]>('inputValue', []);
   const [inputValue2, setInputValue2] = useLocalStorageState<string[]>('inputValue2', []);
@@ -62,11 +63,13 @@ function TextInput({result, setResult}: InputProps) {
           <InputField
             value={inputValue}
             onChange={(e) => handleInputChange(e, setInputValue)}
+            onPaste={() => handlePaste(setInputValue)}
             onClear={() => clearInputValue(setInputValue)}
           />
           <InputField
             value={inputValue2}
             onChange={(e) => handleInputChange(e, setInputValue2)}
+            onPaste={() => handlePaste(setInputValue2)}
             onClear={() => clearInputValue(setInputValue2)}
           />
         </div>
@@ -78,15 +81,21 @@ function TextInput({result, setResult}: InputProps) {
 interface InputFieldProps {
   value: string[];
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onPaste: () => void;
   onClear: () => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({value, onChange, onClear}) => (
+const InputField: React.FC<InputFieldProps> = ({value, onChange, onPaste, onClear}) => (
   <div className="w-6/12">
     <StyledTextInputField multiline rows={4} value={value.join('\n')} onChange={onChange} />
-    <IconButton aria-label="actions" onClick={onClear} sx={{display: 'block', margin: '0px auto'}}>
-      <DeleteIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
-    </IconButton>
+    <div className="flex">
+      <IconButton aria-label="actions" onClick={onPaste} sx={{display: 'block', margin: '0px auto'}}>
+        <ContentPasteGoIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+      </IconButton>
+      <IconButton aria-label="actions" onClick={onClear} sx={{display: 'block', margin: '0px auto'}}>
+        <DeleteIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+      </IconButton>
+    </div>
   </div>
 );
 

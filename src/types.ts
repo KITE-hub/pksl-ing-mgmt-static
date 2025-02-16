@@ -1,4 +1,5 @@
 import {SelectChangeEvent} from '@mui/material';
+import {GridSortModel} from '@mui/x-data-grid';
 
 export interface IResult {
   ingName: string;
@@ -20,12 +21,15 @@ export interface iDishData {
 export interface InputProps {
   result: IResult[];
   setResult: (result: IResult[]) => void;
+  handlePaste: (setter: React.Dispatch<React.SetStateAction<string[]>>) => Promise<void>;
 }
 
 export interface GridProps {
   result: IResult[];
   isMaximumMode: boolean;
   setIsMaximumMode: (isMaximumMode: boolean) => void;
+  sortModel: GridSortModel;
+  onSortModelChange: (model: GridSortModel) => void;
 }
 
 export interface DishOrderInputProps {

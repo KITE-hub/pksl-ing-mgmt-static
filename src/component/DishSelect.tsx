@@ -6,8 +6,10 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {StyledSelect, StyledMenuItem} from './MUIStyledComponents';
 import {Box, Typography, FormControl, IconButton} from '@mui/material';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 
 const dishDataCurry: iDishData[] = Curry as iDishData[];
 const dishDataSalad: iDishData[] = Salad as iDishData[];
@@ -110,21 +112,30 @@ function DishSelect({
           </StyledSelect>
         </FormControl>
       </div>
-      <div className="flex items-center justify-end space-x-2 mx-2">
+      <div className="flex items-center justify-end space-x-0.5 mx-2">
         <input
           type="text"
           value={dish.count}
           onChange={(e) => handleCountChange(category, index, parseInt(e.target.value, 10) || 0)}
-          className="font-bold mr-2 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
+          className="font-bold mr-3 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
         />
+        <IconButton
+          aria-label="actions"
+          onClick={() => handleCountChange(category, index, Math.max(0, dish.count - 10))}
+        >
+          <KeyboardDoubleArrowLeftIcon sx={{color: '#666'}} />
+        </IconButton>
         <IconButton
           aria-label="actions"
           onClick={() => handleCountChange(category, index, Math.max(0, dish.count - 1))}
         >
-          <NavigateBeforeIcon sx={{color: '#666'}} />
+          <KeyboardArrowLeftIcon sx={{color: '#666'}} />
         </IconButton>
         <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 1)}>
-          <NavigateNextIcon sx={{color: '#666'}} />
+          <KeyboardArrowRightIcon sx={{color: '#666'}} />
+        </IconButton>
+        <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 10)}>
+          <KeyboardDoubleArrowRightIcon sx={{color: '#666'}} />
         </IconButton>
       </div>
     </div>
