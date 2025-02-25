@@ -17,10 +17,17 @@ const dishDataDessert: iDishData[] = Dessert as iDishData[];
 
 const menuProps = {
   PaperProps: {
-    style: {
+    sx: {
       boxShadow: 'none',
       border: '1px solid #25d76b',
-      borderRadius: '8px'
+      borderRadius: '8px',
+      backgroundColor: 'var(--input-color)',
+      paddingTop: 0,
+      marginTop: 0,
+      '& .MuiListItem-root': {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
     }
   }
 };
@@ -32,7 +39,8 @@ function DishSelect({
   updateDishOrder,
   handleSelectChange,
   handleCountChange,
-  result
+  result,
+  isDark
 }: DishSelectProps) {
   return (
     <div key={index} className="DishSelect mt-3 w-[360px]">
@@ -40,11 +48,11 @@ function DishSelect({
         <div className="flex ml-auto mr-2">
           {index > 0 && (
             <button onClick={() => updateDishOrder(category, 'delete', index)}>
-              <RemoveIcon sx={{color: '#666'}} />
+              <RemoveIcon sx={{color: 'var(--button-color)'}} />
             </button>
           )}
           <button onClick={() => updateDishOrder(category, 'add', index)}>
-            <AddIcon sx={{color: '#666'}} />
+            <AddIcon sx={{color: 'var(--button-color)'}} />
           </button>
         </div>
         <FormControl>
@@ -58,7 +66,7 @@ function DishSelect({
               (option) => {
                 const totalIngredients = Object.values(option.ingredients).reduce((a, b) => a + b, 0);
                 return (
-                  <StyledMenuItem key={option.name} value={option.name}>
+                  <StyledMenuItem key={option.name} value={option.name} isDark={isDark}>
                     <Box display="flex" alignItems="center" width="255px">
                       <Typography
                         sx={{
@@ -98,7 +106,7 @@ function DishSelect({
                               width={22}
                               height={22}
                             />
-                            <Typography className="mr-2 text-[#653618] w-5" sx={{fontSize: '12px'}}>
+                            <Typography className="mr-2 text-[#653618] dark:text-[#e7b698] w-5" sx={{fontSize: '12px'}}>
                               x{option.ingredients[ingredient]}
                             </Typography>
                           </Box>
@@ -118,24 +126,25 @@ function DishSelect({
           value={dish.count}
           onChange={(e) => handleCountChange(category, index, parseInt(e.target.value, 10) || 0)}
           className="font-bold mr-3 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
+          style={{backgroundColor: 'var(--input-color)'}}
         />
         <IconButton
           aria-label="actions"
           onClick={() => handleCountChange(category, index, Math.max(0, dish.count - 10))}
         >
-          <KeyboardDoubleArrowLeftIcon sx={{color: '#666'}} />
+          <KeyboardDoubleArrowLeftIcon sx={{color: 'var(--button-color)'}} />
         </IconButton>
         <IconButton
           aria-label="actions"
           onClick={() => handleCountChange(category, index, Math.max(0, dish.count - 1))}
         >
-          <KeyboardArrowLeftIcon sx={{color: '#666'}} />
+          <KeyboardArrowLeftIcon sx={{color: 'var(--button-color)'}} />
         </IconButton>
         <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 1)}>
-          <KeyboardArrowRightIcon sx={{color: '#666'}} />
+          <KeyboardArrowRightIcon sx={{color: 'var(--button-color)'}} />
         </IconButton>
         <IconButton aria-label="actions" onClick={() => handleCountChange(category, index, dish.count + 10)}>
-          <KeyboardDoubleArrowRightIcon sx={{color: '#666'}} />
+          <KeyboardDoubleArrowRightIcon sx={{color: 'var(--button-color)'}} />
         </IconButton>
       </div>
     </div>

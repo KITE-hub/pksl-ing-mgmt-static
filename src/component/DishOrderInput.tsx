@@ -18,7 +18,7 @@ const dishDataCurry: iDishData[] = Curry as iDishData[];
 const dishDataSalad: iDishData[] = Salad as iDishData[];
 const dishDataDessert: iDishData[] = Dessert as iDishData[];
 
-function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps) {
+function DishOrderInput({result, setResult, isMaximumMode, isDark}: DishOrderInputProps) {
   const [isOrderOpen, setIsOrderOpen] = useLocalStorageState<boolean>('isOrderOpen', true);
   const orderRef = useRef<HTMLDivElement | null>(null);
   const toggleOrder = () => {
@@ -142,11 +142,13 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
         <div className="flex cursor-pointer" onClick={toggleOrder}>
           <span className="bg-[#f6b84b] w-1.5 mr-1.5"></span>
           <div className="flex justify-between text-white bg-[#f6b84b] px-2 w-full clipSlant">
-            <h3 className="font-bold">メニュー入力</h3>
+            <h3 className="font-bold" style={{color: 'var(--bg-color)'}}>
+              メニュー入力
+            </h3>
             {isOrderOpen ? (
-              <KeyboardArrowUpIcon style={{color: 'white', alignSelf: 'center'}} />
+              <KeyboardArrowUpIcon style={{color: 'var(--bg-color)', alignSelf: 'center'}} />
             ) : (
-              <KeyboardArrowDownIcon style={{color: 'white', alignSelf: 'center'}} />
+              <KeyboardArrowDownIcon style={{color: 'var(--bg-color)', alignSelf: 'center'}} />
             )}
           </div>
         </div>
@@ -161,6 +163,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
               dishOrderSalad={dishOrderSalad}
               dishOrderDessert={dishOrderDessert}
               result={result}
+              isDark={isDark}
             />
             <DishOrderDisplayWide
               updateDishOrder={updateDishOrder}
@@ -170,6 +173,7 @@ function DishOrderInput({result, setResult, isMaximumMode}: DishOrderInputProps)
               dishOrderSalad={dishOrderSalad}
               dishOrderDessert={dishOrderDessert}
               result={result}
+              isDark={isDark}
             />
           </div>
         </Collapse>

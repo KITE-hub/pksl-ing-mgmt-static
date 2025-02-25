@@ -4,17 +4,19 @@
 @tailwind utilities;
 
 :root {
-  --background: #f1f5f9;
-  --foreground: #333;
+  --bg-color: #f1f5f9;
+  --input-color: white;
+  --button-color: #666;
+  --text-color: #333;
 }
 
 html {
   font-size: 16px;
 }
 
-body {
-  color: var(--foreground) !important;
-  background: var(--background) !important;
+html body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   font-family: 'M PLUS 1p', 'Roboto', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
@@ -22,15 +24,39 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.dark {
+  --bg-color: #0e1115;
+  --input-color: #191d24;
+  --button-color: #b7cde1;
+  --text-color: #dbe6f0;
+}
+
+html body.dark {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
 }
 
 ol {
-  list-style-type: decimal; /* 番号を表示 */
+  list-style-type: decimal;
   list-style-position: inside;
 }
 
 .shadow-input {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 420px) {
+  .hide-on-small {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1600px) {

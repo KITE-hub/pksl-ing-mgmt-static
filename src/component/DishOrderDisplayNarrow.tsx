@@ -27,7 +27,8 @@ function DishOrderDisplayNarrow({
   dishOrderCurry,
   dishOrderSalad,
   dishOrderDessert,
-  result
+  result,
+  isDark
 }: DishOrderDisplayProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const tabColors = ['#fe8b71', '#51e188', '#f6bd5a'];
@@ -55,6 +56,7 @@ function DishOrderDisplayNarrow({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
       {state.tabIndex === 1 &&
@@ -68,6 +70,7 @@ function DishOrderDisplayNarrow({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
       {state.tabIndex === 2 &&
@@ -81,6 +84,7 @@ function DishOrderDisplayNarrow({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
     </div>

@@ -8,7 +8,8 @@ function DishOrderDisplayWide({
   dishOrderCurry,
   dishOrderSalad,
   dishOrderDessert,
-  result
+  result,
+  isDark
 }: DishOrderDisplayProps) {
   return (
     <div className="DishOrderDisplayWide">
@@ -28,6 +29,7 @@ function DishOrderDisplayWide({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
       </div>
@@ -47,6 +49,7 @@ function DishOrderDisplayWide({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
       </div>
@@ -66,6 +69,7 @@ function DishOrderDisplayWide({
             handleSelectChange={handleSelectChange}
             handleCountChange={handleCountChange}
             result={result}
+            isDark={isDark}
           />
         ))}
       </div>

@@ -28,7 +28,7 @@ function Switch({
       <StyledSwitch checked={checked} onChange={onChange} />
       <span className="ml-4 mx-2 text-sm">最大値モード</span>
       <IconButton onClick={switchInfoClick}>
-        <InfoOutlinedIcon />
+        <InfoOutlinedIcon sx={{color: 'var(--button-color)'}} />
       </IconButton>
       <ThemeProvider theme={DescriptionTheme}>
         <CssBaseline />

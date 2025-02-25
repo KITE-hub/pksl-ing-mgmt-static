@@ -4,7 +4,7 @@ import Switch from './Switch';
 import {forwardRef} from 'react';
 
 const Grid = forwardRef<HTMLDivElement, GridProps>(
-  ({result, isMaximumMode, setIsMaximumMode, sortModel, onSortModelChange}, ref) => {
+  ({result, isMaximumMode, setIsMaximumMode, sortModel, isDark, onSortModelChange}, ref) => {
     const rows: GridRowsProp = result.map((item, index) => ({
       id: index,
       ...item
@@ -13,6 +13,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
       {
         field: 'ingEP',
         headerName: '食材名',
+        headerClassName: 'header',
         flex: 145,
         minWidth: 145,
         renderCell: (params) => {
@@ -20,7 +21,9 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
           return (
             <div className="flex items-center h-full">
               {isTotalRow ? (
-                <span className="text-sm font-bold">{params.row.ingName}</span>
+                <span className="text-sm font-bold" style={{color: 'var(--text-color)'}}>
+                  {params.row.ingName}
+                </span>
               ) : (
                 <div className="flex items-center h-full">
                   <img
@@ -35,7 +38,9 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
                     }}
                   />
                   <div className="space-y-0.5">
-                    <div className="text-[12px] leading-none">{params.row.ingName}</div>
+                    <div className="text-[12px] leading-none" style={{color: 'var(--text-color)'}}>
+                      {params.row.ingName}
+                    </div>
                     <div className="text-[11px] leading-none text-[#e69b19] font-bold">EP: {params.row.ingEP}</div>
                   </div>
                 </div>
@@ -53,11 +58,16 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
             <span>(現在)</span>
           </div>
         ),
+        headerClassName: 'header',
         flex: 100,
         minWidth: 100,
         renderCell: (params) => {
           const isTotalRow = params.row.id === 'total';
-          return <span style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>{params.row.nowIngCount}</span>;
+          return (
+            <span style={{fontWeight: isTotalRow ? 'bold' : 'normal', color: 'var(--text-color)'}}>
+              {params.row.nowIngCount}
+            </span>
+          );
         },
         sortingOrder: ['asc', null],
         sortComparator: (v1, v2, param1, param2) => {
@@ -77,6 +87,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
             <span>(目標, 差分)</span>
           </div>
         ),
+        headerClassName: 'header',
         flex: 115,
         minWidth: 115,
         renderCell: (params) => {
@@ -85,14 +96,17 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
           return (
             <div className="flex items-center h-full">
               <div className="space-y-[1px]">
-                <div className="text-[13px] leading-none" style={{fontWeight: isTotalRow ? 'bold' : 'normal'}}>
+                <div
+                  className="text-[13px] leading-none"
+                  style={{fontWeight: isTotalRow ? 'bold' : 'normal', color: 'var(--text-color)'}}
+                >
                   {params.row.targetIngCount}
                 </div>
                 <div
                   className="text-[11px] leading-none"
                   style={{
-                    color: isNegative ? 'red' : '#333',
-                    fontWeight: isTotalRow ? 'bold' : 'normal'
+                    color: isNegative ? '#e05252' : 'var(--text-color)',
+                    fontWeight: isTotalRow || isNegative ? 'bold' : 'normal'
                   }}
                 >
                   ({params.row.diffIngCount >= 0 ? `+${params.row.diffIngCount}` : params.row.diffIngCount})
@@ -137,14 +151,17 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
     ];
 
     return (
-      <div ref={ref} className="Grid mx-auto mt-4 mb-6 flex flex-col flex-grow-0">
+      <div className="Grid mx-auto mt-4 mb-6 flex flex-col flex-grow-0">
         <div className="flex">
           <span className="bg-[#5dabfe] w-1.5 mr-1.5"></span>
-          <h2 className="font-bold text-white bg-[#5dabfe] px-2 w-full clipSlant">食材一覧表</h2>
+          <h2 className="font-bold bg-[#5dabfe] px-2 w-full clipSlant" style={{color: 'var(--bg-color)'}}>
+            食材一覧表
+          </h2>
           {/* 食材一覧表の背景色はhsl(211, 99%, 68%) #5dabfe、元はhsl(211, 99%, 64%) #469ffe */}
         </div>
         <Switch checked={isMaximumMode} onChange={(event) => setIsMaximumMode(event.target.checked)} />
         <DataGrid
+          ref={ref}
           rows={rowsWithTotal}
           columns={columns}
           sortModel={sortModel}
@@ -164,8 +181,12 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
               // eslint-disable-next-line
               "'M PLUS 1p','Roboto','Noto Sans JP', 'Helvetica Neue', 'Helvetica', 'Hiragino Sans', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif",
             color: '#333',
-            '& .small-header': {
-              fontSize: '0.8rem'
+            '& .header': {
+              backgroundColor: 'var(--input-color)',
+              color: 'var(--text-color)'
+            },
+            '& .MuiDataGrid-cell': {
+              borderColor: isDark ? '#2d3239' : '#dde0e4' // セルの境界線の色
             }
           }}
         />

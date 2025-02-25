@@ -48,13 +48,16 @@ function TextInput({result, setResult, handlePaste}: InputProps) {
     <div className="TextInput mt-4 mb-6 mx-auto">
       <div className="flex mb-3 cursor-pointer" onClick={toggleInput}>
         <span className="bg-[#25d76b] w-1.5 mr-1.5"></span>
-        <div className="flex text-white bg-[#25d76b] px-2 w-full clipSlant items-end">
+        <div
+          className="flex text-white bg-[#25d76b] px-2 w-full clipSlant items-end"
+          style={{color: 'var(--bg-color)'}}
+        >
           <h3 className="font-bold">テキスト入力</h3>
           <small className="ml-1">(使い方必読)</small>
           {isInputOpen ? (
-            <KeyboardArrowUpIcon style={{color: 'white', alignSelf: 'center', marginLeft: 'auto'}} />
+            <KeyboardArrowUpIcon style={{color: 'var(--bg-color)', alignSelf: 'center', marginLeft: 'auto'}} />
           ) : (
-            <KeyboardArrowDownIcon style={{color: 'white', alignSelf: 'center', marginLeft: 'auto'}} />
+            <KeyboardArrowDownIcon style={{color: 'var(--bg-color)', alignSelf: 'center', marginLeft: 'auto'}} />
           )}
         </div>
       </div>
@@ -80,6 +83,7 @@ function TextInput({result, setResult, handlePaste}: InputProps) {
 
 interface InputFieldProps {
   value: string[];
+  // eslint-disable-next-line
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onPaste: () => void;
   onClear: () => void;
@@ -90,10 +94,10 @@ const InputField: React.FC<InputFieldProps> = ({value, onChange, onPaste, onClea
     <StyledTextInputField multiline rows={4} value={value.join('\n')} onChange={onChange} />
     <div className="flex">
       <IconButton aria-label="actions" onClick={onPaste} sx={{display: 'block', margin: '0px auto'}}>
-        <ContentPasteGoIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+        <ContentPasteGoIcon sx={{color: 'var(--button-color)', display: 'block', margin: '0px auto'}} />
       </IconButton>
       <IconButton aria-label="actions" onClick={onClear} sx={{display: 'block', margin: '0px auto'}}>
-        <DeleteIcon sx={{color: '#666', display: 'block', margin: '0px auto'}} />
+        <DeleteIcon sx={{color: 'var(--button-color)', display: 'block', margin: '0px auto'}} />
       </IconButton>
     </div>
   </div>

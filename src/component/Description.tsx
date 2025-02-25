@@ -97,10 +97,10 @@ function Description() {
   }, []);
 
   return (
-    <div className="Description ml-auto">
+    <div className="Description">
       <ThemeProvider theme={DescriptionTheme}>
         <CssBaseline />
-        <IconButton size="small" aria-label="actions" sx={{color: 'white'}} onClick={moreButtonClick}>
+        <IconButton size="small" aria-label="actions" style={{color: 'var(--bg-color)'}} onClick={moreButtonClick}>
           <MoreIcon />
         </IconButton>
         <Menu
@@ -168,7 +168,7 @@ function Description() {
         >
           <StyledDialogTitle>使い方</StyledDialogTitle>
           <DialogContent dividers>
-            <div className="text-[#333]">
+            <div>
               <div className="flex items-center">
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">基本的な使い方</h3>

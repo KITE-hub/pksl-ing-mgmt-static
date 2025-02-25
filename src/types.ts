@@ -29,6 +29,7 @@ export interface GridProps {
   isMaximumMode: boolean;
   setIsMaximumMode: (isMaximumMode: boolean) => void;
   sortModel: GridSortModel;
+  isDark: boolean;
   onSortModelChange: (model: GridSortModel) => void;
 }
 
@@ -36,6 +37,12 @@ export interface DishOrderInputProps {
   result: IResult[];
   setResult: (result: IResult[]) => void;
   isMaximumMode: boolean;
+  isDark: boolean;
+}
+
+export interface DarkModeButtonProps {
+  isDark: boolean;
+  setIsDark: (isDark: boolean) => void;
 }
 
 export interface DishSelectProps {
@@ -50,6 +57,7 @@ export interface DishSelectProps {
   ) => void;
   handleCountChange: (category: 'Curry' | 'Salad' | 'Dessert', index: number, value: number) => void;
   result: IResult[];
+  isDark: boolean;
 }
 
 export interface DishOrderDisplayProps {
@@ -64,6 +72,7 @@ export interface DishOrderDisplayProps {
   dishOrderSalad: iDishOrder[];
   dishOrderDessert: iDishOrder[];
   result: IResult[];
+  isDark: boolean;
 }
 
 export interface iDishOrder {
