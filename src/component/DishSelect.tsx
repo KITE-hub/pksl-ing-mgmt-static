@@ -70,7 +70,8 @@ function DishSelect({
                     <Box display="flex" alignItems="center" width="255px">
                       <Typography
                         sx={{
-                          fontSize: '0.85em'
+                          fontSize: '0.85em',
+                          color: 'var(--title-color)'
                         }}
                       >
                         {option.name}
@@ -79,7 +80,8 @@ function DishSelect({
                         sx={{
                           fontSize: '0.7em',
                           marginLeft: 'auto',
-                          position: 'relative'
+                          position: 'relative',
+                          color: 'var(--text-color)'
                         }}
                       >
                         x{totalIngredients}, +{option.BonusAtLv1}%
@@ -88,7 +90,8 @@ function DishSelect({
                             fontSize: '0.9em',
                             position: 'absolute',
                             top: '70%',
-                            right: '0'
+                            right: '0',
+                            color: 'var(--text-color)'
                           }}
                         >
                           (Lv.1)
@@ -105,9 +108,12 @@ function DishSelect({
                               alt={ingredient}
                               width={22}
                               height={22}
+                              style={{
+                                filter: `brightness(${isDark ? '85%' : '100%'})`
+                              }}
                             />
-                            <Typography className="mr-2 text-[#653618] dark:text-[#e7b698] w-5" sx={{fontSize: '12px'}}>
-                              x{option.ingredients[ingredient]}
+                            <Typography className="mr-2 text-[#653618] dark:text-[#dd996e] w-5" sx={{fontSize: '12px'}}>
+                              x<span className="ml-[1px]">{option.ingredients[ingredient]}</span>
                             </Typography>
                           </Box>
                         ) : null;
@@ -126,7 +132,7 @@ function DishSelect({
           value={dish.count}
           onChange={(e) => handleCountChange(category, index, parseInt(e.target.value, 10) || 0)}
           className="font-bold mr-3 px-2 focus:px-[7px] h-9 w-16 py-1 box-border rounded-lg border border-[#25d76b] shadow-input focus:outline-none focus:border-2 focus:border-[#25d76b]"
-          style={{backgroundColor: 'var(--input-color)'}}
+          style={{backgroundColor: 'var(--input-color)', color: 'var(--title-color)'}}
         />
         <IconButton
           aria-label="actions"

@@ -48,10 +48,7 @@ function TextInput({result, setResult, handlePaste}: InputProps) {
     <div className="TextInput mt-4 mb-6 mx-auto">
       <div className="flex mb-3 cursor-pointer" onClick={toggleInput}>
         <span className="bg-[#25d76b] w-1.5 mr-1.5"></span>
-        <div
-          className="flex text-white bg-[#25d76b] px-2 w-full clipSlant items-end"
-          style={{color: 'var(--bg-color)'}}
-        >
+        <div className="flex bg-[#25d76b] px-2 w-full clipSlant items-end" style={{color: 'var(--bg-color)'}}>
           <h3 className="font-bold">テキスト入力</h3>
           <small className="ml-1">(使い方必読)</small>
           {isInputOpen ? (

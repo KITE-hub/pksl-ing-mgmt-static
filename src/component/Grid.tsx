@@ -34,7 +34,8 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
                     style={{
                       objectFit: 'cover',
                       marginLeft: '-5px',
-                      borderRadius: '4px'
+                      borderRadius: '4px',
+                      filter: `brightness(${isDark ? '85%' : '100%'})`
                     }}
                   />
                   <div className="space-y-0.5">
@@ -64,7 +65,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
         renderCell: (params) => {
           const isTotalRow = params.row.id === 'total';
           return (
-            <span style={{fontWeight: isTotalRow ? 'bold' : 'normal', color: 'var(--text-color)'}}>
+            <span style={{fontWeight: isTotalRow ? 'bold' : 'normal', color: 'var(--title-color)'}}>
               {params.row.nowIngCount}
             </span>
           );
@@ -105,7 +106,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
                 <div
                   className="text-[11px] leading-none"
                   style={{
-                    color: isNegative ? '#e05252' : 'var(--text-color)',
+                    color: isNegative ? '#e05252' : 'var(--title-color)',
                     fontWeight: isTotalRow || isNegative ? 'bold' : 'normal'
                   }}
                 >
@@ -183,10 +184,10 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
             color: '#333',
             '& .header': {
               backgroundColor: 'var(--input-color)',
-              color: 'var(--text-color)'
+              color: 'var(--title-color)'
             },
             '& .MuiDataGrid-cell': {
-              borderColor: isDark ? '#2d3239' : '#dde0e4' // セルの境界線の色
+              borderColor: 'var(--devide-color)' // セルの境界線の色
             }
           }}
         />

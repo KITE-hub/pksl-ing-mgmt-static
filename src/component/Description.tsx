@@ -9,6 +9,7 @@ import {
   Menu,
   MenuItem,
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogActions,
   Link,
@@ -21,7 +22,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {DescriptionTheme, StyledDialogTitle, StyledButton} from './MUIStyledComponents';
+import {useThemeConfig, StyledButton} from './MUIStyledComponents';
 
 function Description() {
   const [moreMenuAnchor, setMoreMenuAnchor] = useState<HTMLElement | null>(null);
@@ -96,9 +97,11 @@ function Description() {
     }
   }, []);
 
+  const theme = useThemeConfig;
+
   return (
     <div className="Description">
-      <ThemeProvider theme={DescriptionTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <IconButton size="small" aria-label="actions" style={{color: 'var(--bg-color)'}} onClick={moreButtonClick}>
           <MoreIcon />
@@ -108,6 +111,7 @@ function Description() {
           open={isMoreMenuOpen}
           onClose={onMoreMenuClose}
           anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)', color: 'var(--title-color)'}}}
         >
           <MenuItem onClick={simulatorClick}>
             <ListItemIcon>
@@ -117,7 +121,7 @@ function Description() {
           </MenuItem>
           <MenuItem onClick={ingMgmtClick}>
             <ListItemIcon>
-              <CheckIcon />
+              <CheckIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             食材管理ツール
           </MenuItem>
@@ -127,35 +131,35 @@ function Description() {
             </ListItemIcon>
             睡眠管理ツール
           </MenuItem>
-          <Divider />
+          <Divider sx={{borderColor: 'var(--devide-color)'}} />
           <MenuItem onClick={howToMenuClick}>
             <ListItemIcon>
-              <HelpOutlineIcon />
+              <HelpOutlineIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             使い方
           </MenuItem>
           <MenuItem onClick={cautionMenuClick}>
             <ListItemIcon>
-              <WarningAmberIcon />
+              <WarningAmberIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             注意点
           </MenuItem>
           <MenuItem onClick={referenceMenuClick}>
             <ListItemIcon>
-              <MenuBookIcon />
+              <MenuBookIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             参考元
           </MenuItem>
           <MenuItem onClick={devRequestMenuClick}>
             <ListItemIcon>
-              <InfoOutlinedIcon />
+              <InfoOutlinedIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             開発者・要望について
           </MenuItem>
-          <Divider />
+          <Divider sx={{borderColor: 'var(--devide-color)'}} />
           <MenuItem onClick={handleClearStorage}>
             <ListItemIcon>
-              <DeleteIcon />
+              <DeleteIcon sx={{color: 'var(--button-color)'}} />
             </ListItemIcon>
             ローカルストレージの全削除
           </MenuItem>
@@ -165,15 +169,16 @@ function Description() {
           onClose={onHowToDialogClose}
           scroll="paper"
           aria-describedby="scroll-dialog-description"
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)'}}}
         >
-          <StyledDialogTitle>使い方</StyledDialogTitle>
-          <DialogContent dividers>
-            <div>
+          <DialogTitle sx={{color: 'var(--title-color)', fontSize: '20px', fontWeight: 'bold'}}>使い方</DialogTitle>
+          <DialogContent dividers sx={{borderColor: 'var(--devide-color)'}}>
+            <div style={{color: 'var(--text-color)'}}>
               <div className="flex items-center">
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">基本的な使い方</h3>
               </div>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2" style={{borderColor: 'var(--devide-color)'}} />
               <div>
                 {'　'}
                 このツールは、食材バッグのスクリーンショットを画像として読み込み、目的のレシピを入力することで、食材数を管理します。
@@ -184,7 +189,7 @@ function Description() {
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">詳細な使い方</h3>
               </div>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2" style={{borderColor: 'var(--devide-color)'}} />
               <ol>
                 <li>XS以降のiPhoneを入手し、iOS 15以降をインストールする。</li>
                 <li>
@@ -217,15 +222,16 @@ function Description() {
           onClose={onCautionDialogClose}
           scroll="paper"
           aria-describedby="scroll-dialog-description"
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)'}}}
         >
-          <StyledDialogTitle>注意点</StyledDialogTitle>
-          <DialogContent dividers>
-            <div className="text-[#333]">
+          <DialogTitle sx={{color: 'var(--title-color)', fontSize: '20px', fontWeight: 'bold'}}>注意点</DialogTitle>
+          <DialogContent dividers sx={{borderColor: 'var(--devide-color)'}}>
+            <div style={{color: 'var(--text-color)'}}>
               <div className="flex items-center">
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">テキスト入力について</h3>
               </div>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2" style={{borderColor: 'var(--devide-color)'}} />
               <div>
                 {'　'}
                 このツールでは、iPhoneの画像のライブテキスト機能を用いて食材数（現在）を更新します。ただし、文字が正しく読み取れない場合や、画像内に対応する食材名や食材数が存在しない場合、
@@ -238,7 +244,7 @@ function Description() {
                 alt="OK1"
                 width={750}
                 height={1294}
-                className="mx-auto w-1/2"
+                className="mx-auto w-1/2 rounded-lg"
               />
               <div className="text-center">
                 図1. 読み取り成功例 <small>(画像中の全ての食材が認識される)</small>
@@ -249,7 +255,7 @@ function Description() {
                 alt="NG1"
                 width={750}
                 height={340}
-                className="mx-auto w-1/2"
+                className="mx-auto w-1/2 rounded-lg"
               />
               <div className="text-center">
                 図2. 読み取り失敗例1 <small>(最下段の食材名が途切れているため認識されない)</small>
@@ -260,7 +266,7 @@ function Description() {
                 alt="NG2"
                 width={750}
                 height={337}
-                className="mx-auto w-1/2"
+                className="mx-auto w-1/2 rounded-lg"
               />
               <div className="text-center">
                 図3. 読み取り失敗例2 <small>(最下段の食材数に対応する食材名が画像中に存在しないため認識されない)</small>
@@ -271,7 +277,7 @@ function Description() {
                 alt="NG3"
                 width={750}
                 height={581}
-                className="mx-auto w-1/2"
+                className="mx-auto w-1/2 rounded-lg"
               />
               <div className="text-center">
                 図4. 読み取り失敗例3 <small>(最上段の食材数が不鮮明なため認識されない)</small>
@@ -288,10 +294,11 @@ function Description() {
           onClose={onReferenceDialogClose}
           scroll="paper"
           aria-describedby="scroll-dialog-description"
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)'}}}
         >
-          <StyledDialogTitle>参考元</StyledDialogTitle>
-          <DialogContent dividers>
-            <div className="text-[#333]">
+          <DialogTitle sx={{color: 'var(--title-color)', fontSize: '20px', fontWeight: 'bold'}}>参考元</DialogTitle>
+          <DialogContent dividers sx={{borderColor: 'var(--devide-color)'}}>
+            <div>
               <ul>
                 <li>
                   <Link
@@ -336,10 +343,13 @@ function Description() {
           onClose={onDevRequestDialogClose}
           scroll="paper"
           aria-describedby="scroll-dialog-description"
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)'}}}
         >
-          <StyledDialogTitle>開発者・要望について</StyledDialogTitle>
-          <DialogContent dividers>
-            <div className="text-[#333]">
+          <DialogTitle sx={{color: 'var(--title-color)', fontSize: '20px', fontWeight: 'bold'}}>
+            開発者・要望について
+          </DialogTitle>
+          <DialogContent dividers sx={{borderColor: 'var(--devide-color)'}}>
+            <div style={{color: 'var(--text-color)'}}>
               <div>
                 {'　'}
                 このツールは、{' '}

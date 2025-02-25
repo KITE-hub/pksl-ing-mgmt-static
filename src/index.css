@@ -4,10 +4,12 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #f1f5f9;
-  --input-color: white;
-  --button-color: #666;
-  --text-color: #333;
+  --bg-color: hsl(210, 20%, 95%);
+  --input-color: hsl(210, 20%, 97%);
+  --button-color: hsl(210, 5%, 40%);
+  --title-color: hsl(210, 5%, 15%);
+  --text-color: hsl(210, 5%, 30%);
+  --devide-color: hsl(218, 11%, 85%);
 }
 
 html {
@@ -30,10 +32,12 @@ html body {
 }
 
 .dark {
-  --bg-color: #0e1115;
-  --input-color: #191d24;
-  --button-color: #b7cde1;
-  --text-color: #dbe6f0;
+  --bg-color: hsl(210, 20%, 7%);
+  --input-color: hsl(210, 20%, 9%);
+  --button-color: hsl(210, 15%, 50%);
+  --title-color: hsl(210, 15%, 85%);
+  --text-color: hsl(210, 15%, 70%);
+  --devide-color: hsl(210, 20%, 15%);
 }
 
 html body.dark {

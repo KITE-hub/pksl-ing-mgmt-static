@@ -1,4 +1,4 @@
-import {Select, MenuItem, TextField, Button, DialogTitle, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
+import {Select, MenuItem, TextField, Button, Switch, SwitchProps, Tabs, Tab} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import {createTheme} from '@mui/material/styles';
 
@@ -124,7 +124,7 @@ export const StyledTab = styled(Tab)<{selectedcolor: string}>(({selectedcolor}) 
 }));
 
 // Description.tsx
-export const DescriptionTheme = createTheme({
+export const useThemeConfig = createTheme({
   typography: {
     fontFamily:
       // eslint-disable-next-line
@@ -132,13 +132,8 @@ export const DescriptionTheme = createTheme({
     fontSize: 14
   }
 });
-export const StyledDialogTitle = styled(DialogTitle)({
-  fontSize: '20px',
-  fontWeight: 'bold',
-  color: '#333'
-});
 export const StyledButton = styled(Button)({
-  color: '#333',
+  color: 'var(--title-color)',
   fontWeight: 'bold',
   borderRadius: '9999px',
   fontSize: '16px',
@@ -204,7 +199,7 @@ export const StyledSwitch = styled((props: SwitchProps) => (
   },
   '& .MuiSwitch-track': {
     borderRadius: 26 / 2,
-    backgroundColor: '#b9c0c6',
+    backgroundColor: '#abb3ba',
     opacity: 1,
     transition: theme.transitions.create(['background-color'], {
       duration: 500

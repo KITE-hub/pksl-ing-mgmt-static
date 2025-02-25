@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyledSwitch} from './MUIStyledComponents';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import {IconButton, Dialog, DialogContent, DialogActions} from '@mui/material';
-import {StyledDialogTitle, StyledButton, DescriptionTheme} from './MUIStyledComponents';
+import {IconButton, Dialog, DialogTitle, DialogContent, DialogActions} from '@mui/material';
+import {StyledButton, useThemeConfig} from './MUIStyledComponents';
 import {ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -22,6 +22,8 @@ function Switch({
     setIsSwitchInfoOpen(false);
   };
 
+  const theme = useThemeConfig;
+
   return (
     <div className="flex items-center ml-auto my-[2px]">
       <span className="mx-4 text-sm">合計モード</span>
@@ -30,24 +32,27 @@ function Switch({
       <IconButton onClick={switchInfoClick}>
         <InfoOutlinedIcon sx={{color: 'var(--button-color)'}} />
       </IconButton>
-      <ThemeProvider theme={DescriptionTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <Dialog
           open={isSwitchInfoOpen}
           onClose={onSwitchInfoClose}
           scroll="paper"
           aria-describedby="scroll-dialog-description"
+          sx={{'& .MuiPaper-root': {backgroundColor: 'var(--input-color)'}}}
         >
-          <StyledDialogTitle>合計モードと最大値モード</StyledDialogTitle>
-          <DialogContent dividers>
-            <div className="text-[#333]">
+          <DialogTitle sx={{color: 'var(--title-color)', fontSize: '20px', fontWeight: 'bold'}}>
+            合計モードと最大値モード
+          </DialogTitle>
+          <DialogContent dividers sx={{borderColor: 'var(--devide-color)'}}>
+            <div style={{color: 'var(--text-color)'}}>
               <p>これらのモードは、食材数 (目標) の計算方法を変更するためのものです。</p>
               <br />
               <div className="flex items-center">
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">合計モード</h3>
               </div>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2" style={{borderColor: 'var(--devide-color)'}} />
               <div>
                 {'　'}
                 合計モードは、各食材でカレー・シチュー、サラダ、デザート・ドリンクの合計食材数の合計を食材数 (目標)
@@ -62,7 +67,7 @@ function Switch({
                 <div className="w-1.5 h-6 bg-[#25d76b] mr-2"></div>
                 <h3 className="font-bold text-base">最大値モード</h3>
               </div>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2" style={{borderColor: 'var(--devide-color)'}} />
               <div>
                 {'　'}
                 最大値モードは、各食材でカレー・シチュー、サラダ、デザート・ドリンクの内、最も合計食材数が多い料理カテゴリーの合計食材数を食材数
